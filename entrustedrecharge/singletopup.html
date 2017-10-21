@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>单笔充值</title>
+	<link rel="stylesheet" href="../css/menudetail.css">
+	<script src="../script/jquery-1.10.1.min.js"></script>
+
+</head>
+<body>
+<div class="rightdiv">
+	<div class="prompt">
+		<strong class="tex14">委托充值管理&gt;&gt;</strong>
+		<span>单笔充值</span>
+	</div>
+	<div class="content">
+		<form action="batchRechargewtrechargeSubmit.action" id="batchFrom" name="batchFrom" method="post">
+			<input type="hidden" id="csrftoken" name="csrftoken" value="064da1a1-f9db-4f27-b628-0df60ce7d425">
+			<table width="100%" cellpadding="0" cellspacing="0" class="table2">
+				<tbody><tr>
+					<td width="35%">&nbsp;</td>
+					<td width="65%">&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="texalirig">用户名：</td>
+					<td>
+						<input type="text" id="cust_no" name="cust_no" size="30" maxlength="60" class="sinputtex pad2 width220 height24" autocomplete="off">&nbsp;*
+					</td>
+				</tr>
+				<tr>
+					<td class="texalirig">充值金额: </td>
+					<td>
+						<input type="text" id="amt" maxlength="10" class="sinputtex pad2 width220 height24 bitamt">
+						&nbsp;元&nbsp;*
+						<input type="hidden" name="amt" id="hid_amt">
+					</td>
+				</tr>
+				<tr>
+					<td class="texalirig">大写金额: </td>
+					<td>
+						<div class="amtChineseShow bitamt"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="texalirig">备注信息: </td>
+					<td>
+						<input type="text" name="remark" id="remark" class="sinputtex pad2 width220 height24" autocomplete="off">
+					</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td id="queren">
+						<input type="button" value="确&nbsp;认" class="queding">
+						<input type="reset" value="重&nbsp;置" class="quxiao">
+					</td>
+				</tr>
+				</tbody></table>
+		</form>
+	</div>
+	<!--  -->
+	<div class="explain left">
+		<div class="explainbt">
+			<p>说明</p>
+		</div>
+		<div class="pad10 sming">
+			<p>委托充值支持银行：中国银行，农业银行，工商银行，建设银行，广东发展银行，兴业银行，邮储银行，平安银行，中信银行，招商银行，光大银行，华夏银行，民生银行，浦发银行。</p>
+			<br>
+			&nbsp;&nbsp;<a href="#" id="bankLimitClick">+  点击查看银行限额</a>
+		</div>
+
+		<div id="bankLimit" >
+			<table cellpadding="2" cellspacing="0" width="100%">
+				<tbody><tr id="limitTitle">
+					<td>银行名称</td>
+					<td>限额-单笔</td>
+					<td>限额-单日</td>
+					<td>限额-单月</td>
+				</tr>
+
+				<tr>
+					<td>中国光大银行</td>
+					<td>999.99/笔</td>
+					<td>999.99/日</td>
+					<td>999.99/月</td>
+				</tr>
+
+
+				<tr>
+					<td>招商银行</td>
+					<td>666.66/笔</td>
+					<td>666.66/日</td>
+					<td>666.66/月</td>
+				</tr>
+
+
+
+				</tbody></table>
+		</div>
+
+	</div>
+</div>
+
+<script>
+	$(function(){
+		// 点击显示隐藏的
+		$("#bankLimitClick").click(function(){
+			$("#bankLimit").toggle();
+		});
+		//
+	});
+</script>
+<script>
+	$(function(){
+
+		$("#bankLimit").hide();
+
+		curReset();
+
+		function curReset(){
+			if($.trim($("#hid_amt").attr("orign"))!=''){
+				$(".amtChineseShow").html(Arabia_to_Chinese($.trim($("#hid_amt").attr("orign"))));
+			}else{
+				$(".amtChineseShow").html("");
+			}
+			resetShowChinese();
+		}
+
+		$("input[type='reset'").click(function(){
+			curReset();
+		});
+
+		function Arabia_to_Chinese(Num){
+			var flag="";
+			Num=$.trim(Num);bankLimit
+			if(Num=="0"){
+				return "零";
+			}
+			if(Num.charAt(0)=="-"){
+				Num = Num.replace("-","");
+				flag="负";
+			}
+			for(i=Num.length-1;i>=0;i--)
+			{
+				Num = Num.replace(",","");//替换tomoney()中的“,”
+				Num = Num.replace(" ","");//替换tomoney()中的空格
+			}
+			//---字符处理完毕，开始转换，转换采用前后两部分分别转换---//
+			part = String(Num).split(".");
+			newchar = "";
+			//小数点前进行转化
+			for(i=part[0].length-1;i>=0;i--){
+
+				tmpnewchar = "";
+				perchar = part[0].charAt(i);
+				switch(perchar){
+					case "0": tmpnewchar="零" + tmpnewchar ;break;
+					case "1": tmpnewchar="壹" + tmpnewchar ;break;
+					case "2": tmpnewchar="贰" + tmpnewchar ;break;
+					case "3": tmpnewchar="叁" + tmpnewchar ;break;
+					case "4": tmpnewchar="肆" + tmpnewchar ;break;
+					case "5": tmpnewchar="伍" + tmpnewchar ;break;
+					case "6": tmpnewchar="陆" + tmpnewchar ;break;
+					case "7": tmpnewchar="柒" + tmpnewchar ;break;
+					case "8": tmpnewchar="捌" + tmpnewchar ;break;
+					case "9": tmpnewchar="玖" + tmpnewchar ;break;
+				}
+				switch(part[0].length-i-1){
+					case 0: tmpnewchar = tmpnewchar +"元" ;break;
+					case 1: if(perchar!=0)tmpnewchar= tmpnewchar +"拾" ;break;
+					case 2: if(perchar!=0)tmpnewchar= tmpnewchar +"佰" ;break;
+					case 3: if(perchar!=0)tmpnewchar= tmpnewchar +"仟" ;break;
+					case 4: tmpnewchar= tmpnewchar +"万" ;break;
+					case 5: if(perchar!=0)tmpnewchar= tmpnewchar +"拾" ;break;
+					case 6: if(perchar!=0)tmpnewchar= tmpnewchar +"佰" ;break;
+					case 7: if(perchar!=0)tmpnewchar= tmpnewchar +"仟" ;break;
+					case 8: tmpnewchar= tmpnewchar +"亿" ;break;
+					case 9: tmpnewchar= tmpnewchar +"拾" ;break;
+				}
+				newchar = tmpnewchar + newchar;
+			}
+			//小数点之后进行转化
+			if(Num.indexOf(".")!=-1){
+				/* if(part[1].length > 2) {
+				 alert("小数点之后只能保留两位,系统将自动截段");
+				 part[1] = part[1].substr(0,2)
+				 } */
+				for(i=0;i<part[1].length;i++){
+					tmpnewchar = "";
+					perchar = part[1].charAt(i);
+					switch(perchar){
+						case "0": tmpnewchar="零" + tmpnewchar ;break;
+						case "1": tmpnewchar="壹" + tmpnewchar ;break;
+						case "2": tmpnewchar="贰" + tmpnewchar ;break;
+						case "3": tmpnewchar="叁" + tmpnewchar ;break;
+						case "4": tmpnewchar="肆" + tmpnewchar ;break;
+						case "5": tmpnewchar="伍" + tmpnewchar ;break;
+						case "6": tmpnewchar="陆" + tmpnewchar ;break;
+						case "7": tmpnewchar="柒" + tmpnewchar ;break;
+						case "8": tmpnewchar="捌" + tmpnewchar ;break;
+						case "9": tmpnewchar="玖" + tmpnewchar ;break;
+					}
+					if(i==0)tmpnewchar =tmpnewchar + "角";
+					if(i==1)tmpnewchar = tmpnewchar + "分";
+					newchar = newchar + tmpnewchar;
+				}
+			}
+			//替换所有用汉字
+			while(newchar.search("零零") != -1)
+				newchar = newchar.replace("零零", "零");
+			newchar = newchar.replace("零亿", "亿");
+			newchar = newchar.replace("亿万", "亿");
+			newchar = newchar.replace("零万", "万");
+			newchar = newchar.replace("零元", "元");
+			newchar = newchar.replace("零角", "");
+			newchar = newchar.replace("零分", "");
+			if (newchar.charAt(newchar.length-1) == "元")
+				newchar = newchar+"整";
+			if(newchar.indexOf("元")==0){
+				newchar=newchar.substring(1);
+			}
+			newchar = flag+newchar;
+			return newchar;
+		}
+
+		function resetShowChinese(){
+			if($.trim($(".amtChineseShow").html())==''){
+				$.trim($(".amtChineseShow").html(""));
+			}
+		}
+		function wrongAmt(){
+			$("#amt").val("");
+			$("#hid_amt").val("");
+			$(".amtChineseShow").html("");
+			resetShowChinese();
+		}
+
+//		$("#amt").keyup(function(){
+//			var amt=$("#amt").val();
+//			for(i=amt.length-1;i>=0;i--)
+//			{
+//				amt = amt.replace(",","");//替换tomoney()中的“,”
+//				amt = amt.replace(" ","");//替换tomoney()中的空格
+//			}
+//			if(isNaN(amt)){
+//				execCommand('undo')
+//			}
+//			$(".amtChineseShow").html(Arabia_to_Chinese($("#amt").val()));
+//// 	    resetShowChinese();
+//		});
+		$("#amt").blur(function(){
+			var amt=$("#amt").val();
+			if(amt==null||$.trim(amt)==''){
+				wrongAmt();
+				return;
+			}
+
+			for(i=amt.length-1;i>=0;i--)
+			{
+				amt = amt.replace(",","");//替换tomoney()中的“,”
+				amt = amt.replace(" ","");//替换tomoney()中的空格
+			}
+			if(isNaN(amt.replace(",",""))){
+				alert("充值金额输入非法！");
+				wrongAmt();
+				return;
+			}
+			if(parseFloat(amt)<=0){
+				alert("充值金额错误,必须大于0！");
+				wrongAmt();
+				return;
+			}else{
+
+				//	$("#amt").val(""+Number(amt).toFixed(2));//设置为标准输入格式
+
+				var str=Number(amt).toFixed(2);
+				/*加上千位符  */
+				var str=str.split('').reverse().join('').replace(/(\d{3})/g,'$1,').replace(/\,$/,'').split('').reverse().join('');
+				//显示
+				$("#amt").val(str);
+				$("#hid_amt").val(amt);
+				$(".amtChineseShow").html(Arabia_to_Chinese($("#amt").val()));
+// 	      resetShowChinese();
+			}
+		});
+
+
+// //判断用户名
+// $(function(){
+// 	 $('#cust_no').blur(function(){
+// 	 	var cust_no=$("#cust_no").val();
+// 	 	if($.trim(cust_no)==''){
+// 					alert("用户名不能为空");
+// 				}
+// 	 });
+// });
+
+		$(".queding").click(function(){
+			var amt=$("#amt").val();
+			var remark=$("#remark").val();
+			var cust_no=$("#cust_no").val();
+			for(i=amt.length-1;i>=0;i--)
+			{
+				amt = amt.replace(",","");//替换tomoney()中的“,”
+				amt = amt.replace(" ","");//替换tomoney()中的空格
+			}
+			try{
+				if($.trim(cust_no)==''){
+					throw "用户名不能为空";
+				}
+				if($.trim(amt)==''){
+					wrongAmt();
+					throw "充值金额不能为空";
+				}
+				if(isNaN(amt.replace(",",""))){
+					wrongAmt();
+					throw "充值金额输入非法" ;
+				}
+				if(parseFloat(amt)<=0){
+					wrongAmt();
+					throw "充值金额错误,必须大于0";
+				}
+
+				//此处是为了在确定弹出框处显示出千位分割符正确
+				var str=Number(amt).toFixed(2);
+				var str=str.split('').reverse().join('').replace(/(\d{3})/g,'$1,').replace(/\,$/,'').split('').reverse().join('');
+
+				$("#hid_amt").val(amt.replace(",",""));
+
+				if(confirm("委托充值的金额为: "+str+"元,确认充值?")){
+					showWait();
+					$("#batchFrom").submit();
+				}
+			}catch(e){
+				alert(e);
+			}
+		});
+
+
+	});
+	function message(){
+		var mess='';
+		if(mess!=''){
+			if(mess=='success'){
+				alert("充值提交成功，等待审核");
+				$(window.parent.document).find("input[type=text]").val("");
+				$(window.parent.document).find(".amtChineseShow").html("");
+			}else{
+				alert(mess);
+			}
+		}
+		parent.hideWait();
+	}
+</script>
+</body>
+</html>

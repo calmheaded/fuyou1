@@ -1,0 +1,315 @@
+*{
+    margin:0;
+    padding:0;
+}
+a{
+	text-decoration:none;
+}
+ul li {
+    list-style: none;
+}
+.content {
+    width: 98%;
+    margin-left:1%;
+    border: 1px solid #c3ddee;
+    margin-top: 10px;
+}
+#txt {
+    height: 24px;
+    line-height: 24px;
+}
+#import{
+	margin-top:30px;
+	margin-left:60px;
+}
+.sinputtex {
+    border: 1px solid #86bcdc;
+    background: #fff url('../images/ssk_bg.gif') repeat-x 0 0;
+}
+.width220 {
+    width: 220px;
+}
+.pad2 {
+    padding: 2px;
+}
+.file{
+	margin-top: 80px;
+    margin-left: 178px;
+    margin-bottom: 32px;
+}
+.prompt{
+    margin-bottom: 60px;
+    margin-left: 245px;
+}
+.bluebt {
+    width: 80px;
+    height: 28px;
+    font: bold 14px "微软雅黑";
+    margin-left: 10px;
+    background: url('../images/bluebt_bg.gif') no-repeat 0 0;
+    border: 0;
+    cursor: pointer;
+}
+.select {
+    width: 80px;
+    height: 29px;
+    margin-top: 10px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    background: url("../images/quedingbt_bg.png") 0px 0px no-repeat;
+    font: bold 14px 宋体;
+    border: 0px;
+}
+.quxiao {
+    background: url('../images/quxiaobt_bg.png') no-repeat 0 0;
+    width: 80px;
+    height: 29px;
+    margin-top: 10px;
+    color: #555;
+    font: bold 14px "宋体";
+    border: 0;
+    cursor: pointer;
+}
+.explain{
+	width:98%;
+	margin-left:1%;
+	margin-top:10px;
+	border:1px solid #c3ddee;
+	height:60px;
+}
+.explain p{
+	height:30px;
+	background:#EAEAEA;
+	line-height:30px;
+	padding-left:20px;
+	font-weight:bolder;
+}
+.containTable{
+	width: 98%;
+    margin-left:1%;
+    border: 1px solid #c3ddee;
+    overflow:auto;
+}
+.containTable #table{
+	width:98%;
+	margin-left:1%;
+	margin-top:8px;
+	table-layout: auto;
+	text-align: center;
+}
+.containTable #table .tablebtbg {
+    background: url('../images/tableb_tg2.gif') repeat-x 0 0;
+}
+.containTable #table .tablebtbg th {
+    font: normal 12px "宋体";
+    border-right: 1px solid #92BAD4;
+}
+.containTable #table .tablebtbg th .tablebtlef {
+    float: left;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    background: url('../images/tableblef_tg2.gif') no-repeat left 0;
+}
+.containTable #table .tablebtbg th .tablebtrig {
+    float: left;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    background: url('../images/tablebrig_tg2.gif') no-repeat right 0;
+}
+.page {
+    margin-top: 15px;
+    margin-bottom: 30px;
+    margin-left: 20px;
+    height: auto;
+    padding: 2px 0;
+}
+.page a {
+    padding: 3px 8px;
+    margin-left: 4px;
+}
+.marlefrig5 {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.marlef10 {
+    margin-left: 10px;
+}
+.pad2 {
+    padding: 2px;
+}
+.gobg {
+    width: 33px;
+    height: 19px;
+    border: 0;
+    margin-left: 5px;
+    background: url('../images/go_bg.gif') no-repeat 0 0;
+    cursor: pointer;
+}
+.accountOne p{
+	margin-top:30px;
+	margin-left:60px;
+}
+.accountOne .select{
+	margin-top: 31px;
+    margin-left: 302px;
+    margin-bottom: 58px;
+}
+.accountTwo .import{
+	margin-left:55px;
+}
+.accountSix #table{
+	width:500px;
+	height:300px;
+	margin:20px auto;
+}
+.accountSix #table tr{
+	height:60px;
+}
+.bgcolor{
+	background:#F7F7F7;
+}
+.accountSeven p{
+	margin:20px 0;
+}
+.accountSeven p .label{
+	margin-left:14px;
+}
+.transferTwo .prompt2{
+    margin-bottom:20px;
+}
+.transferFive2{
+    height:60px;
+}
+.transfertransactionFive{
+    height:60px;
+}
+.spacing p{
+    margin:20px 0;
+}
+.spacing p .label{
+    margin-left:14px;
+}
+.accountFour .yeqian {
+    position: relative;
+    width: 837px;
+    z-index: 2;
+}
+.accountFour .yeqian ul li {
+    display: block;
+    float: left;
+    width: 125px;
+    height: 31px;
+    line-height: 31px;
+    margin-right: 4px;
+    text-align: center;
+    background: url('../images/yjyeqianli_bg.gif') no-repeat 0 0;
+    cursor: pointer;
+}
+.accountFour .yeqian ul li a{
+    color:black;
+}
+.accountFour .martop10 {
+    margin-top: 10px;
+    margin-left:14px;
+}
+.accountFour .yeqian .xzlibg a {
+    float: left;
+    width: 125px;
+    height: 31px;
+    line-height: 31px;
+    background: url('../images/yjyeqianlihover_bg.gif') no-repeat 0 0;
+    color: #fff;
+    cursor: pointer;
+}
+.accountFour .tab_box{
+    width: 98%;
+    left:14px;
+    position:relative;
+    top:30px;
+    border: 1px solid #c3ddee;
+}
+.accountFour .tab_box .table2{
+    display:none;
+}
+.accountFour .tab_box #table{
+    margin-top:20px;
+    margin-bottom:26px;
+}
+.accountFour .tab_box #table tr{
+    height:32px;
+}
+.accountFour .tab_box #table tr td:first-child{
+    text-align:right;
+}
+.accountFour .tab_box #table tr td .spann{
+    display:inline-block;
+    height:32px;
+    line-height:32px;
+    margin-left:16px;
+}
+.accountFour .tab_box #table input[type="text"],.accountFour .tab_box #table input[type="password"]{
+    height:24px;
+    width:220px;
+    font-size:20px;
+}
+.accountFour .tab_box #table select{
+    height:24px;
+    width:220px;
+    font-size:20px;
+}
+.accountFour .explainn{
+    width: 98%;
+    border: 1px solid #c3ddee;
+    position: relative;
+    top: 38px;
+    left: 14px;
+}
+.accountFour .explainn p{
+    height:30px;
+    background:#EAEAEA;
+    line-height:30px;
+    padding-left:20px;
+    font-weight:bolder;
+}
+.accountFour .explainn .explainol{
+    list-style-type:circle;
+    margin-left:55px;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+.accountFour .explainn .explainol li{
+    line-height:28px;
+    font-size:14px;
+}
+.accountFive{
+    height:80px;
+}
+.transferOne .tableOne #tableOne{
+    margin-top: 56px;
+    margin-left: 450px;
+}
+.transferOne table tr{
+    height:42px;
+}
+.transferOne table tr td:first-child{
+    text-align:right;
+}
+.transferOne .tableTab .one table{
+    margin-top: 10px;
+    margin-left: 432px;
+    margin-bottom:40px;
+}
+.transferOne .tableTab .two table{
+    margin-top: 10px;
+    margin-left: 420px;
+    margin-bottom:40px;
+}
+.transferOne .tableTab .two{
+    display:none;
+}
+.transferOne .tableTab .two p{
+    padding-left:476px;
+    padding-top:28px;
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>预授权综合管理/预授权管理</title>
+	<link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+	<div class="content spacing bgcolor">
+		<p><label class="label">起始日期：</label><input type="date"><label class="label">终止日期：</label><input type="date"></p>
+		<p><label class="label">用户名：</label><input type="text"><label class="label">状态：</label><select id=""><option value="">请选择</option></select><input type="button" value="查询" class="bluebt"><input type="button" value="导出" class="bluebt"><input type="button" value="批量导入" class="bluebt" style="margin-left:70px;"><input type="button" value="新增" class="bluebt"></p>
+	</div>
+	<div class="containTable">
+		<table id="table" cellpadding="0" cellspacing="0">
+			<tbody>
+				<tr class="tablebtbg">
+					<th style="border-left:none;white-space: nowrap;"><span class="tablebtlef">合同号</span></th>
+					<th>出账账户</th>
+					<th>出账用户名</th>
+					<th>出账用户名称</th>
+					<th>入账账户</th>
+					<th>入账用户名</th>
+					<th>入账用户名称</th>
+					<th>冻结日期</th>
+					<th>冻结总金额(元)</th>
+					<th>冻结金额(元)</th>
+					<th>状态</th>
+					<th>备注</th>
+					<th style="border-right:none;white-space: nowrap;"><span class="tablebtrig">操作</span></th>
+				</tr>
+			</tbody>
+		</table>
+		<div class="page">
+			<a href="#" style="background:#fcf1e3;border:1px solid #e58f19;color:#e58f19;font-weight:bold;">1</a><span class="marlefrig5">共0页</span><span class="marlef10">跳转到<input type="text" size="4" value="1" id="tzym" class="pad2"><input type="button" onclick="goToPage()" value=" " class="gobg"></span>
+		</div>
+	</div>
+</body>
+</html>

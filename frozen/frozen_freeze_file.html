@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>冻结管理/冻结文件查询</title>
+	<link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+	<div class="content spacing bgcolor">
+		<p><label class="label">起始日期：</label><input type="date" id="startTime" value="2016/6/23"><label class="label">终止日期：</label><input type="date" id="endTime"><input type="button" value="查询" class="bluebt" onclick="fastSearch()"></p>
+		<script>
+		window.onload = function(){
+			function fastSearch(){
+		 	var start = document.getElementById('startTime').value;
+			var end = document.getElementById('endTime').value;
+				alert(start);
+				alert(end);
+
+	
+
+		 }
+		}
+		 
+			
+
+		</script>
+		<script>
+			// 时间 
+		function nowTime(){
+			var now = new Date();
+			var dateString = date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate();
+			start.value=dateString;
+		} 
+		nowTime();		
+		</script>
+		
+	</div>
+	<div class="containTable">
+		<table id="table" cellpadding="0" cellspacing="0">
+			<tbody>
+				<tr class="tablebtbg">
+					<th style="border-left:none;white-space: nowrap;"><span class="tablebtlef">上传日期</span></th>
+					<th>文件序号</th>
+					<th>上传文件名</th>
+					<th>文件状态</th>
+					<th>结果描述</th>
+					<th style="border-right:none;white-space: nowrap;"><span class="tablebtrig">操作</span></th>
+				</tr>
+				<tr>
+					<th>17010001131</th>
+					<th>ss</th>
+					<th>ss</th>
+					<th>ss</th>
+					<th>ss</th>
+					<th>ss</th>
+				</tr>
+					<tr>
+					<th>16010001131</th>
+					<th>ss</th>
+					<th>ss</th>
+					<th>ss</th>
+					<th>ss</th>
+					<th>ss</th>
+				</tr>
+					<tr>
+					<th>17010001123</th>
+					<th>ss</th>
+					<th>ss</th>
+					<th>ss</th>
+					<th>ss</th>
+					<th>ss</th>
+				</tr>
+			</tbody>
+		</table>
+		<div class="page">
+			<a href="#" style="background:#fcf1e3;border:1px solid #e58f19;color:#e58f19;font-weight:bold;">1</a><span class="marlefrig5">共0页</span><span class="marlef10">跳转到<input type="text" size="4" value="1" id="tzym" class="pad2"><input type="button" onclick="goToPage()" value=" " class="gobg"></span>
+		</div>
+	</div>
+	<script>
+
+
+			function checkIsSameMonth(){
+	if($("#startTime").val()==""){
+		alert("起始日期不能为空!");
+		return false;
+	}
+	if($("#endTime").val()==""){
+		alert("终止日期不能为空!");
+		return false;
+	}
+	if($("#startTime").val().substring(0,6)!=$("#endTime").val().substring(0,6)){
+			alert("查询范围只能为一个月!");
+			return false;
+	}
+	return true;
+}
+
+function CharNumMode(iN) {
+    if (iN >= 48 && iN <= 57){ //数字 
+        return true;
+    }
+    return false;
+}
+function CharZmMode(iN) {
+	  if ((iN >= 65 && iN <= 90)
+			  ||(iN >= 97 && iN <= 122)){ //字母
+	    	return true;
+	   } 
+	  return false;
+}
+
+function hasMode(num){
+	var hasNum=false;
+	var hasZm=false;
+	for(var i=0;i<num.length;i++){
+		if(!hasNum){
+			hasNum=CharNumMode(num.charCodeAt(i));
+		}
+		if(!hasZm){
+			hasZm=CharZmMode(num.charCodeAt(i));
+		}
+	}
+	if(num.length<8||!hasNum||!hasZm){
+		return false;
+	}else{
+		return true;
+	}
+}
+
+function refreshCode(){
+	var code='<img src="RandomImage.servlet?a='+Math.random()+'" alt="验证码" />';
+	document.getElementById("codeSpan").innerHTML="";
+	var codeSpan=document.getElementById("codeSpan");
+	codeSpan.innerHTML=code;
+}
+
+/*跨月查询检查*/
+function checkMonthAcross(ele_startDate, ele_endDate){
+	var start;
+	var end;
+	if(ele_startDate != null && ele_endDate != null){
+		start = $(ele_startDate).val();
+		end = $(ele_endDate).val();
+	}else{
+		start = $("#startTime").val();
+		end = $("#endTime").val();
+	}
+	
+	if (start == "") {
+		alert("起始日期不能为空!");
+		return false;
+	}
+	if (end == "") {
+		alert("终止日期不能为空!");
+		return false;
+	}
+	var d_start = string2Date(start);
+	var d_end = string2Date(end);
+	if (!compareDate(d_start, d_end)) {
+		alert("终止日期必须晚于起始日期!");
+		return false;
+	}
+	var temp_end = d_start.setMonth(d_start.getMonth() + 1);
+	var d = new Date(temp_end);
+	//直接判断结束日期
+	if (d_end > d) {
+		alert("查询范围只能为一个月内!");
+		return false;
+	}
+
+	return true;
+	
+}
+
+/*跨3月查询检查*/
+function checkThreeMonthAcross(ele_startDate, ele_endDate){
+
+	var start;
+	var end;
+	if(ele_startDate != null && ele_endDate != null){
+		start = $(ele_startDate).val();
+		end = $(ele_endDate).val();
+	}else{
+		start = $("#startTime").val();
+		end = $("#endTime").val();
+	}
+
+	if (start == "") {
+		alert("起始日期不能为空!");
+		return false;
+	}
+	if (end == "") {
+		alert("终止日期不能为空!");
+		return false;
+	}
+
+	var d_start = string2Date(start);
+	var d_end = string2Date(end);
+	if (!compareDate(d_start, d_end)) {
+		alert("终止日期必须晚于起始日期!");
+		return false;
+	}
+	var temp_end = d_start.setMonth(d_start.getMonth() + 3);
+	var d = new Date(temp_end);
+	//直接判断结束日期
+	if (d_end > d) {
+		alert("查询范围不能超过3个月!");
+		return false;
+	}
+
+	return true;
+}
+
+/*yyyyMMdd形式的日期*/
+function string2Date(str){
+	var y = str.substring(0,4);
+	var m = str.substring(4,6);
+	var d = str.substring(6);
+	var month = parseInt(m) - 1;
+	var date = new Date(y, month, d);
+	return date;
+}
+
+function compareDate(d1, d2){
+	if(d1 <= d2){
+		return true;
+	}
+	return false;
+}
+
+/*跨31天内查询检查*/
+function checkLtOrEq31Across(ele_startDate, ele_endDate){
+	var start;
+	var end;
+	if(ele_startDate != null && ele_endDate != null){
+		start = $(ele_startDate).val();
+		end = $(ele_endDate).val();
+	}else{
+		start = $("#startTime").val();
+		end = $("#endTime").val();
+	}
+	if (start == "") {
+		alert("起始日期不能为空!");
+		return false;
+	}
+	if (end == "") {
+		alert("终止日期不能为空!");
+		return false;
+	}
+	var d_start = string2Date(start);
+	var d_end = string2Date(end);
+	if (!compareDate(d_start, d_end)) {
+		alert("终止日期必须晚于起始日期!");
+		return false;
+	}
+	
+	//判断起始日期是否在31天内
+	if(!isLtOrEq31Day(d_start, 31)) {
+		return false;
+	}
+	return true;
+}
+
+/* 判断起始日期是否小于等于指定天数 */
+function isLtOrEq31Day(d_start, addDayCount) {
+    var curr_dd = new Date();
+	var temp_dd = d_start.setDate(d_start.getDate() + addDayCount);
+	var src_ddd = new Date(temp_dd);
+	if (src_ddd < curr_dd) { //起始日期加31天应不小于当前日期
+		alert("起始日期不能超过当前日期" + addDayCount + "天");
+		return false;
+	} else {
+		return true;
+	}
+}
+
+/*跨31天外查询检查*/
+function checkGt31Across(ele_startDate, ele_endDate){
+	var start;
+	var end;
+	if(ele_startDate != null && ele_endDate != null){
+		start = $(ele_startDate).val();
+		end = $(ele_endDate).val();
+	}else{
+		start = $("#startTime").val();
+		end = $("#endTime").val();
+	}
+	if (start == "") {
+		alert("起始日期不能为空!");
+		return false;
+	}
+	if (end == "") {
+		alert("终止日期不能为空!");
+		return false;
+	}
+	var d_start = string2Date(start);
+	var d_end = string2Date(end);
+	if (!compareDate(d_start, d_end)) {
+		alert("终止日期必须晚于起始日期!");
+		return false;
+	}
+	
+	var temp_end = d_start.setMonth(d_start.getMonth() + 3);
+	var d = new Date(temp_end);
+	//直接判断结束日期
+	if (d_end > d) {
+		alert("查询范围不能超过3个月!");
+		return false;
+	}
+	
+	//判断起始日期是否在31天内
+	if(!isGt31Day(d_end, 31)) {
+		return false;
+	}
+	return true;
+}
+
+/* 判断是否大于指定天数 */
+function isGt31Day(d_end, addDayCount) {
+    var curr_dd = new Date();
+	var temp_dd = d_end.setDate(d_end.getDate() + addDayCount);
+	var src_ddd = new Date(temp_dd);
+	if (src_ddd >= curr_dd) { //结束日期加31天应小于当前日期
+		alert("结束日期须在" + addDayCount + "天前");
+		return false;
+	} else {
+		return true;
+	}
+}
+
+	</script>
+</body>
+</html>

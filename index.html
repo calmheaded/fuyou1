@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>富友账户管理系统</title>
+	<style>
+html{
+	font:12px "宋体";
+	color:#333;
+	line-height:1.8em;
+	}
+html,body{
+height:100%
+}	
+.htmlbg {
+    width: 100%;
+    height: 100%;
+    min-height: 774px;       
+    background: #81beff url(images/htmlbg_bg.jpg) repeat-x 0 0;
+}
+
+.outdiv {
+    width: 1020px;
+    margin: 0 auto;
+}
+.out {
+    width: 1020px;
+    height: 774px;
+    background: url(images/outbg_bg.jpg) no-repeat 0 bottom;
+}
+.logo {
+    width: 545px;
+    height: 67px;
+    margin: 0 auto;
+    padding: 107px 0 42px 0;
+}
+.height180 {
+    height: 180px;
+}
+
+.padlef240 {
+    padding-left: 240px;
+}
+
+/*login*/
+.logindiv {
+    width: 417px;
+    height: auto;
+    margin-left: 300px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding-bottom: 15px;
+}
+
+.login_form {
+    width: 90%;
+    margin: 0 auto;
+}
+.login_error {
+    color: red;
+    text-align: center;
+    height: 20px;
+}
+.user_tp_grid {
+    width: 60%;
+    margin: 0 auto;
+    height: 24px;
+}
+/**/
+.user_tp_grid {
+    width: 60%;
+    margin: 0 auto;
+    height: 24px;
+}
+.user_tp_radio {
+    float: left;
+    margin-left: 20px;
+}
+.radio_label {
+    padding: 0 8px;
+    float: left;
+}
+/**/
+.input_grid {
+    width: 100%;
+    margin-left: 10px;
+    position: relative;
+    height: 40px;
+}
+.input_label {
+    float: left;
+    line-height: 30px;
+}
+.input_element {
+    position: absolute;
+    left: 50px;
+}
+.input_login {
+    width: 286px;
+    height: 28px;
+    line-height: 30px;
+    background: #edf6ff;
+    border: 1px solid #879fbd;
+    padding-left: 5px;
+}
+
+/**/
+.width85 {
+    width: 85px;
+}
+/**/
+a.yzmbtn {
+    font-size: 10px;
+    border: 1px solid #879fbd;
+    text-decoration: none;
+    color: black;
+    
+    line-height: 27px;
+    margin-left: 8px;
+    padding: 0 5px;
+}
+.submit_grid {
+    text-align: center;
+    margin-top: 5px;
+}
+.loginbt {
+    width: 86px;
+    height: 32px;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    background: url(images/loginbt_bg.png) 0px 0px no-repeat;
+    border-width: 0px;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+    font: bold 14px 宋体;
+}
+
+/*code*/
+.code 
+{
+ font-family:Arial;
+ font-style:italic;
+ color:blue;
+ font-size:18px;
+ width: 85px;
+ padding:2px 3px;
+ letter-spacing:3px;
+ font-weight:bolder;
+ float:left;
+ cursor:pointer;
+ text-align:center;
+ vertical-align:middle;
+}
+
+</style>
+<script src="script/jquery-1.10.1.min.js"></script>
+</head>
+<body>
+	<div class="htmlbg">
+		<div class="outdiv">
+			<div class="out">
+				<!--  -->
+				<div class="logo"> <img src="images/_index_logo.png" alt=""></div>
+				<!--  -->
+				<div class="padlef240 height180">
+					<img src="images/build_img.jpg" alt="" width="540" height="180" border="0">					
+				</div>
+				<!--  -->
+				<div class="logindiv">
+					<form action="" name="login" method="post">
+						<div class="login_form">
+							<div class="login_error">
+								<!-- errors -->
+							</div>
+							<div class="user_tp_grid "><!--  -->
+								<input type="radio" name="userTp" value="1" class="user_tp_radio"  checked="checked" >
+								<label class="radio_label"> 个人用户</label>
+								<input type="radio" name="userTp" value="2" class="user_tp_radio">
+								<label class="radio_label">商户用户</label>
+							</div>
+						<!--  -->
+							<div class="input_grid">
+								<label class="input_label">用户名</label>
+								<div class="input_element ">
+	   	    						<input type="text" class="input_login" name="loginId" id="loginId" maxlength="16" style="color: gray;" autocomplete="off"  value="">
+	   	    					</div>
+							</div>
+							<!--geren -->
+							<div class="input_grid personiid" >
+								<label class="input_label">图形码</label>
+								<!--  -->
+								<div class="input_element" >
+									<input type="text" name="codeNo2" id="codeNo2" class="input_login width85" maxlength="7" autocomplete="off" style="float:left;">
+									<span id="checkCode" onclick="createCode()"  class="code" style="display: block;float: left;margin: 0 10px;padding-top: 5px;">
+									</span>
+									<a href="javascript:;" class="refreshCode2" style="line-height: 32px;" onclick="createCode()">换一张</a>
+								</div>
+								
+							</div>
+							<!--  -->
+							<div class="input_grid"  id="userYzm" >
+								<label class="input_label">验证码</label>
+								<div class="input_element" style="display: block;">
+									<input type="text" name="yzm" onkeyup="" id="yzm" class="input_login width85 " maxlength="7" autocomplete="off" value="">
+									<a href="javascript:;" class="yzmbtn" id="pageyzmbtn">
+		                				短信获取验证码
+	                				</a>
+								</div>
+	
+							</div>
+							<!-- shanghu -->
+							<div class="input_grid passwordid" style="display: none;" >
+								<label class="input_label">密 码</label>
+								<div class="input_element">
+	                  			<span id="spPwd"><input type="password" id="password" name="password" class="input_login" style="color: gray;" autocomplete="off"></span>
+		   	    				</div>
+							</div>
+							<!--  -->
+							<div class="input_grid" id="mchntYzm" style="display: none;">
+								<label class="input_label">验证码</label>
+								<div class="input_element">
+									<input type="text" name="codeNo" id="codeNo" class="input_login width85" maxlength="7" autocomplete="off" style="float:left;">
+									<span  id="checkCode1" onclick="createCode()" class="code" style="display: block;float: left;margin: 0 10px;padding-top: 5px;">
+									</span>
+									<a href="javascript:;" class="refreshCode" style="line-height: 32px;" onclick="createCode()">换一张</a>
+								</div>
+								<script>
+											// 验证码
+											var code;
+											function createCode() 
+												{
+												 code = "";
+												 var codeLength = 4; //验证码的长度
+												 var checkCode = document.getElementById("checkCode");
+												 var checkCode1 = document.getElementById("checkCode1");
+
+												 var codeChars = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
+												      'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+												      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'); //所有候选组成验证码的字符，当然也可以用中文的
+												 for(var i = 0; i < codeLength; i++) 
+												 {
+												  var charNum = Math.floor(Math.random() * 52);
+												  code += codeChars[charNum];
+												 }
+												 if(checkCode) 
+												 {
+												  checkCode.className = "code";
+												  checkCode.innerHTML = code;
+												  checkCode1.className = "code";
+												  checkCode1.innerHTML = code;
+												
+												 }
+											}
+											createCode();
+											// 获取radio
+											function getUserTp() {
+													var chk = '1';
+													var chkObjs = document.getElementsByName("userTp");
+												    for(var i=0; i<chkObjs.length; i++){
+												        if(chkObjs[i].checked){
+												            chk = chkObjs[i].value;
+												            break;
+												        }
+												    }
+												    return chk;
+											    }
+										
+										$(function(){
+												 // 切换用户
+												$("input[type='radio']").click(function(){
+													   	if(getUserTp()=='1'){
+													   	$('.personiid').css('display','block');
+											  	 	 	$('#userYzm').css('display','block');
+												    	$('.passwordid').css('display','none');
+												    	$('#mchntYzm').css('display','none');
+											  	 	 }
+											  	 	 if(getUserTp()=='2'){							  	 	 
+											  	 	 	$('.personiid').css('display','none');
+											  	 	 	$('#userYzm').css('display','none');
+											  	 	 	$('.passwordid').css('display','block');
+												    	$('#mchntYzm').css('display','block');
+											  	 	 }											  	 	
+												});
+
+											});
+
+										// 封装ajax 
+										// function  logoin(alterableIp,url,requestStr){
+										// 	var alterableIp = '210.14.139.198:8080';//ip
+										// 	$.ajax({
+									 //           type: "POST",								      
+									 //       		url: url,								        
+									 //           data: JSON.stringify(requestStr),
+									 //           async:false,
+									 //           success: function(data){
+									 //              if(data.resultCode == "0000"){
+									 //                   console.log(data);
+									 //                }else{
+									 //                  alert(data.resultMsg);
+									 //                }
+									 //            },
+									 //           error: function(data){
+									 //                   alert("error");
+									 //            }
+									 //        });
+										// }
+									
+								$(function(){
+									var alterableIp = '210.14.139.198:8080';//ip
+									// 获取验证吗
+									$('#pageyzmbtn').click(function(){
+										var loginId=document.getElementById("loginId").value;
+										var requestStr = {
+												detail: [
+													{												
+													"mobileNo":loginId													
+													}
+												]
+											};			
+										$.ajax({
+								           type: "POST",								      
+								       		url: "http://"+alterableIp+"/MSZFP2P/operator/sendValidateMessage",								        
+								           data: JSON.stringify(requestStr),
+								           async:false,
+								           success: function(data){
+								              if(data.resultCode == "0000"){
+								                   console.log(1);
+								                }else{
+								                  alert(data.resultMsg);
+								                }
+								            },
+								           error: function(data){
+								                   alert("error");
+								            }
+								        });
+									});
+									
+										// 确认登陆
+										$('.loginbt').click(function(){
+											var loginId=document.getElementById("loginId").value;
+											var password=document.getElementById("password").value;
+											var codeNo2=document.getElementById("codeNo2").value;
+											var codeNo=document.getElementById("codeNo").value;
+											var yzm=document.getElementById("yzm").value;
+											
+											
+											var userTps=document.getElementsByName("userTp");
+											if(loginId==null||loginId==''||loginId=='用户名/手机号'){
+												alert('请输入用户名');
+												$("#loginId").focus();
+												return false;
+											}
+											var  re = /^1\d{10}$/;
+											if(!re.test(loginId)){
+												alert('请输入手机号');
+												return false;
+											}
+											// 手机号验证 ....................
+												for(var i=0;i<userTps.length;i++){
+													if(userTps[i].checked){
+														userTp=userTps[i].value;
+													}
+												}
+												// 两种用户输入合法验证
+												if(userTp==1){	
+													if(codeNo2==null||codeNo2==''){
+														alert("请输入图形码");
+														$("#codeNo2").focus();
+														return false;
+													}																									
+													else if(yzm==null||yzm==''){
+														alert("请输入验证码");
+														$("#yzm").focus();
+														return false;
+													}
+													else if(codeNo2.toUpperCase()!=code.toUpperCase()){
+														alert('输入的验证码有误');
+													}
+												}else{	
+														if(password==null||password==''){
+															alert("请输入密码");
+															return false;
+														}
+														else if(codeNo==null||codeNo==''){
+															alert("请输入验证码");
+															return false;
+														}
+														else if(codeNo.toUpperCase()!=code.toUpperCase()){
+															alert('输入的验证码有误');
+														}
+
+													}
+													  window.location.href="home.html";	
+												//login
+												// var requestStr1 = {
+												// 	detail: [
+												// 		{												
+												// 		"mobileNo":loginId,
+												// 		"mobileCode":yzm
+												// 		}
+												// 	]
+												// };	
+												
+												// $.ajax({
+										  //           type: "POST",	
+										  //      		url: "http://"+alterableIp+"/MSZFP2P/operator/validateMessage",								        
+										  //          data: JSON.stringify(requestStr1),
+										  //          async:false,
+										  //          success: function(data){
+										  //             if(data.detail[0].resultCode == "0000"){						
+										  //             	  window.location.href="../628/index.html";				              	
+										  //                  console.log('验证码正确');
+										  //               }else{
+										  //                 alert(data.detail[0].resultMsg);
+										  //               }
+										  //           },
+										  //          error: function(data){
+										  //                  alert("error");
+										  //           }
+										  //       });
+
+											});
+										// if(user_tp == '2') {
+										// 	$.ajax({
+										// 		type:'POST',
+										// 		dataType:'text',
+										// 		data:{
+										// 			userTp=2,
+										// 			loginId='encodeURIComponent(loginId)',
+										// 			password='encodeURIComponent(document.getElementById("password").value)'
+										// 		},
+										// 		url:' http://210.14.139.199/MSZFP2P/operator/sendValidateMessage',
+										// 		success:function(msg){
+										// 			$("#login").submit();
+										// 		}
+										// 	});
+										// } 
+
+									});
+								</script>
+									
+							</div>
+							<!--  -->
+							<div class="submit_grid ">
+								<input class="loginbt" type="button" value="登&nbsp;录">
+							</div>
+						</div>
+					</form>
+				</div>
+				<!-- logoend -->
+			</div>
+		</div>
+	</div>
+</body>
+</html>

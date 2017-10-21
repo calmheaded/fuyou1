@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>系统管理/法人用户列表</title>
+	<link rel="stylesheet" href="../css/main.css">
+	<script src="../script/jquery-1.10.1.min.js"></script>
+	<style>
+		.selected{ background: #c2e0f8; }
+	</style>
+
+</head>
+<body>
+	<div class="content spacing bgcolor">
+		<p><label class="label" >用户名：</label><input type="text" id="username"><label class="label">姓名：</label><input type="text" id="xm"><label class="label">身份证：</label><input type="text"  id="selfcard"></p>
+		<p><label class="label">用户状态：</label><select id=""><option value="">请选择</option></select><label class="label">起始日期：</label><input type="date"><label class="label">终止日期：</label><input type="date"><input id="searchbtn" type="button" value="查询" class="bluebt"></p>
+	</div>
+	<div class="containTable">
+		<table id="table" cellpadding="0" cellspacing="0">
+			<tbody id="tbList">
+				<tr class="tablebtbg">
+					<th style="border-left:none;white-space: nowrap;"><span class="tablebtlef">用户名</span></th>
+					<th>企业名称</th>
+					<th>法人姓名</th>
+					<th>法人手机号码</th>
+					<th>法人邮箱</th>
+					<th>注册时间</th>
+					<th>用户状态</th>
+					<th style="border-right:none;white-space: nowrap;"><span class="tablebtrig">操作</span></th>
+				</tr>
+				<tr>
+					<th>zhangsan</th>
+					<th>2</th>
+					<th>3</th>
+					<th>4</th>
+					<th>5</th>
+					<th>6</th>
+					<th>7</th>
+					<th>8</th>
+				</tr>
+				<tr>
+					<th>zhangsan</th>
+					<th>2</th>
+					<th>3</th>
+					<th>4</th>
+					<th>5</th>
+					<th>6</th>
+					<th>7</th>
+					<th>8</th>
+				</tr>
+				<tr>
+					<th>lisi</th>
+					<th>2</th>
+					<th>3</th>
+					<th>4</th>
+					<th>5</th>
+					<th>6</th>
+					<th>7</th>
+					<th>8</th>
+				</tr>
+				
+			</tbody>
+		</table>
+		<script>
+		
+
+			// 表格搜索
+			window.onload = function(){
+				var oTab = document.getElementById('table');
+				var userInput =document.getElementById('username');
+				var searchBtn = document.getElementById('searchbtn');
+				// 查询
+				// searchBtn.onclick = function(){
+				// 	for(var i=0;i<oTab.tBodies[0].rows.length;i++){
+				// 		var str1= oTab.tBodies[0].rows[i].cells[0].innerHTML.toLowerCase();
+				// 		var str2 = userInput.value.toLowerCase();
+
+				// 		if(str1==str2){
+				// 			  oTab.tBodies[0].rows[i].style.background='#c2e0f8';
+				// 			}else{
+				// 				 oTab.tBodies[0].rows[i].style.background='';
+				// 			}
+
+				// 	}
+				// }
+
+
+				 function biaoge(){
+					for(var i=0;i<oTab.tBodies[0].rows.length;i++){
+						var str1= oTab.tBodies[0].rows[i].cells[0].innerHTML.toLowerCase();
+						var str2 = userInput.value.toLowerCase();
+
+						if(str1==str2){
+							  oTab.tBodies[0].rows[i].style.background='#c2e0f8';
+							}else{
+								 oTab.tBodies[0].rows[i].style.background='';
+							}
+
+					}
+				}
+				// 表格换色 
+				$(function(){
+					$('#tbList>tr').hover(function(){
+						$(this).addClass('selected').siblings().removeClass('selected');
+					});
+				});
+
+				//事件绑定
+				function bind(obj, evname, fn) {
+					if (obj.addEventListener) {
+						obj.addEventListener(evname, fn, false);
+					} else {
+						obj.attachEvent('on' + evname, function() {
+							fn.call(obj);
+						});
+					}
+				}
+				// 验证用户名
+				function checkUsername(){
+					var xingm = document.getElementById('xm');
+					if(xingm.value==''||xingm.value==null){
+						 alert( "请先填写用户名！" );
+					}
+
+				}
+				// 验证身份证
+				function isCardNo()  
+				{  
+					var card =document.getElementById('selfcard').value;
+				   // 身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X  
+				   var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;  
+				   if(reg.test(card) === false)  
+				   {  
+				       alert("身份证输入不合法");  
+				       return  false;  
+				   }  
+				}  
+			
+				bind(searchBtn,'click',biaoge);
+				bind(searchBtn,'click',checkUsername);
+				bind(searchBtn,'click',isCardNo)
+
+			}
+
+
+
+
+			//控制tr的颜色
+				// 	 function showColor(a){
+				// 				a.style.backgroundColor="";
+				// 		}
+				// 		function hideColor(a){
+
+
+				// 			a.style.backgroundColor="#c2e0f8";
+
+				// }
+				
+				
+
+
+			
+			
+		</script>
+		<div class="page">
+			<a href="#" style="background:#fcf1e3;border:1px solid #e58f19;color:#e58f19;font-weight:bold;">1</a><span class="marlefrig5">共0页</span><span class="marlef10">跳转到<input type="text" size="4" value="1" id="tzym" class="pad2"><input type="button" onclick="goToPage()" value=" " class="gobg"></span>
+		</div>
+	</div>
+	
+	
+</body>
+</html>

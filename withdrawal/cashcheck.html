@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>提现复核</title>
+	<link rel="stylesheet" href="../css/menudetail.css">
+	<script src="../script/jquery.min.js"></script>
+</head>
+<body>
+	<div class="rightdiv left">
+		 <div class="prompt">
+        	<strong class="tex14">
+					委托提现管理
+      	&gt;&gt;</strong>
+        	<span>委托提现交易复核</span>
+		
+        </div>
+      <div class="content">
+			<form action="" id="" name="" method="">
+			<input type="hidden" value="" name="busiCd">
+			<input type="hidden" value="" name="txn_tp">
+		          	<div class=" pad10 sousuodiv">
+						<table width="100%">
+							<tbody><tr style="height: 35px;">
+							<td>
+									起始日期： <input readonly="readonly" style="width: 80px" class="" name="" value="" id="" type="date" >
+		        	 				终止日期： <input readonly="readonly" class="" style="width: 80px"  name="" value="" id="" type="date">
+									
+									
+										复核内容 :<select name="src_tp" id="src_tp">
+												<option value="3" selected="selected">批量上传文件</option>
+												<option value="2">单笔</option>
+											 </select>
+									
+									文件名：<input type="text" name="file_name" id="file_name" maxlength="23" value="">
+								  <input type="button" class="bluebt" value="查询" >
+							</td>
+							</tr>
+			    		</tbody></table>
+		          	</div>
+ 			</form>
+          <div class=" pad10 width815">
+            <div  style="overflow-x: auto;">
+            <table width="100%" cellpadding="0" cellspacing="0" class="center table" style="table-layout: auto;">
+            
+            <tbody id="tbody1">
+              <tr class="tablebtbg">
+               			<th style="border-left:none;white-space: nowrap;"><span class="tablebtlef">	上传日期  </span></th>
+						<th style="white-space: nowrap;">文件序号                     </th>
+						<th style="white-space: nowrap;">上传文件名                  </th>
+						<th style="border-right:none;white-space: nowrap;"><span class="tablebtrig">操作</span></th>
+                </tr>
+                
+                     </tbody>
+                     
+                     
+                </table>
+            </div>
+            <div class="page">
+<a href="#" style="background:#fcf1e3;border:1px solid #e58f19;color:#e58f19;font-weight:bold;">1</a><span class="marlefrig5">共0页</span><span class="marlef10">跳转到<input type="text" size="4" value="1" id="" class="pad2"><input type="button"  value=" " class="gobg" onclick="goToPage();"></span></div>
+          </div>
+        </div>
+        <div class="explain left">
+      </div>
+    </div>
+</body>
+<script>
+// 判断文件名
+function checkfile(){	
+	var pattern = !/[\/\\"<>\?\*]/gi;
+	var fileInput = document.getElementById('file_name');
+	var fileStr = fileInput.value;
+	fileInput.onblur = function(){	
+		
+	}
+}
+// 
+//判断页码是否合法
+		function goToPage(){																				    					            
+				var pageVal=document.getElementById('tzym');														            
+				var countPageNo=0;																		 
+				var txt=/^\d*$/;																													
+				if(!txt.test(pageVal.value)){																										
+					alert('页数应为正整数!');																										
+					pageVal.focus();																												
+					return ;																																
+				}
+
+		
+</script>
+</html>

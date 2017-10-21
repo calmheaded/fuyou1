@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>上传文件查询</title>
+</head>
+<link rel="stylesheet" href="../css/menudetail.css">
+<script src="../script/jquery.min.js"></script>
+
+<body>
+	<div class="rightdiv "> 
+		 <div class="prompt">
+        	<strong class="tex14">
+					委托体现管理
+      	&gt;&gt;</strong>
+        	<span>上传文件查询</span>
+		
+        </div>  
+      <div class="content">
+			<form action="" id="searchForm" name="" method="">
+			<input type="hidden" value="PWTX" name="busiCd">
+		          	<div class=" pad10 sousuodiv">
+						<table width="100%">
+							<tbody><tr style="height: 35px;">
+							<td>
+									起始日期： <input readonly="readonly"  name="startTime" value="" id="startTime" type="date" >
+		        	 				终止日期： <input readonly="readonly"   onclick="WdatePicker({dateFmt:'yyyyMMdd'});" name="endTime" value="" id="endTime" type="date">
+									<input type="button" class="bluebt" value="查询" >
+							</td>
+							</tr>
+			    		</tbody></table>
+		          	</div>
+ 			</form>
+          <div class=" pad10 width815">
+            <div  style="overflow-x: auto;">
+            <table width="100%" cellpadding="0" cellspacing="0" class="center table" style="table-layout: auto;">
+              <tbody><tr class="tablebtbg">
+               			<th style="border-left:none;white-space: nowrap;"><span class="tablebtlef">	上传日期  </span></th>
+						<th style="white-space: nowrap;">文件序号                     </th>
+						<th style="white-space: nowrap;">上传文件名                     </th>
+						<th style="white-space: nowrap;">文件状态                 </th>
+						<th style="white-space: nowrap;">结果描述                  </th>
+						<th style="border-right:none;white-space: nowrap;"><span class="tablebtrig">操作</span></th>
+                </tr>
+                
+                </tbody></table>
+            </div>
+            <div class="page">
+<a href="#" style="background:#fcf1e3;border:1px solid #e58f19;color:#e58f19;font-weight:bold;">1</a><span class="marlefrig5">共0页</span><span class="marlef10">跳转到<input type="text" size="4" value="1" id="tzym" class="pad2"><input type="button" value=" " class="gobg" onclick="goToPage();"></span></div>
+          </div>
+        </div>
+        <div class="explain ">
+      </div>
+    </div>
+    <script>
+    	//判断页码是否合法
+		function goToPage(){																				    					            
+				var pageVal=document.getElementById('tzym');														            
+				var countPageNo=0;																		 
+				var txt=/^\d*$/;																													
+				if(!txt.test(pageVal.value)){																										
+					alert('页数应为正整数!');																										
+					pageVal.focus();																												
+					return ;																																
+				}	
+
+
+	
+				$(function(){
+				// 	autoCompleteName("fast_search");
+				});
+				function fastSearch(){
+					/* if(!checkThreeMonthAcross()){//查询三个月内
+						return;
+					} */
+					var checkDate = false;
+					if($("#dateScope").val()=='1') {
+						checkDate = checkLtOrEq31Across();
+					} else {
+						checkDate = checkGt31Across();
+					}
+					if(!checkDate) {
+						return;
+					}
+					document.getElementById("searchForm").submit();
+				}
+				function resetSearch(){
+					document.getElementById("fast_search").value="";
+					document.getElementById("word").value="";
+					document.getElementById("startTime").value="";
+					document.getElementById("endTime").value="";
+					document.getElementById("src_rsp_cd").value="";
+				// 	document.getElementById("searchForm").submit();
+				}
+			//文件查询
+    </script>
+</body>
+</html>

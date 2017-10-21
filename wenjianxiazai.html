@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>下载</title>
+
+</head>
+<body>
+<!-- <div class="login_center"><a href="javascript:_login()"></a></div> 
+ -->  <!--   <input type="button" value="进入1" onClick = "downloadFile('http://imgsrc.baidu.com/imgad/pic/item/caef76094b36acaf0accebde76d98d1001e99ce7.jpg')">
+	<script>
+		function downloadFile(url) {   
+        try{ 
+            var elemIF = document.createElement("iframe");   
+            elemIF.src = url;   
+            elemIF.style.display = "none";   
+            document.body.appendChild(elemIF);   
+        }catch(e){ 
+ 
+        } 
+    }
+    //
+
+	</script> -->
+
+	<script>
+// 		fetch('http://somehost/somefile.zip').then(res => res.blob().then(blob => {
+//  var a = document.createElement('a');
+//  var url = window.URL.createObjectURL(blob);
+//  var filename = 'myfile.zip';
+//  a.href = url;
+//  a.download = filename;
+//  a.click();
+//  window.URL.revokeObjectURL(url);
+//  document.appendChild(a);
+// }))
+
+
+<a href="fileDownload_downLoadTemplateFile.action?busiCd=PWDJ" title="">点击下载</a>
+	</script>
+</body>
+</html>

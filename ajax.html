@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../script/jquery.min.js"></script>
+</head>
+<body>
+<script>
+    window.onload = function(){
+        Refulsh();
+        function Refulsh(){
+            $.ajax({
+                type: "get",
+                dataType:"json",
+                async:false,
+                url: "http://cg.zjcgxt.com/jzh/balanceSearchAction_refreshBalance.action",
+                success: function(data){
+                    alert(data.length);
+
+                }
+            });
+        }
+
+
+    }
+</script>
+</body>
+</html>

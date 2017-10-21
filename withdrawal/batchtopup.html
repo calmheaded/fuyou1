@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>批量充值</title>
+	<link rel="stylesheet" href="../css/menudetail.css">
+    <script src="../script/jquery.min.js"></script>
+
+</head>
+<body>
+	<div class="rightdiv ">
+    	  <div class="prompt">
+            <strong class="tex14">委托充值管理&gt;&gt;</strong>
+            <span>批量提现</span>
+        </div>
+        <div class="content">
+          <div class=" pad10 width815">
+          	<div class="">
+          	<form action="" id="" name="" method="" enctype="multipart/form-data" target="">
+            	<input type="hidden" name="busiCd" value="PWTX">
+            	<table width="100%" cellpadding="0" cellspacing="0" class="table2">
+                	<tbody><tr>
+                    	<td width="22%" align="right">EXCEL批量导入模版&nbsp;<a  title="" onclick="downloadFile('../images/bluebt_bg.gif',content)">点击下载</a></td>
+                    	<td width="30%">&nbsp;</td>
+                        <td width="36%">&nbsp;</td>
+                    </tr>
+                    <tr>
+                    	<td>&nbsp;</td>
+                    	<td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                	<tr>
+                    	<td class="texalirig pad2">请选择文件：</td>
+                    	<td><input type="file" name="file" id="fileId" class="sinputtex pad2 width220"></td>
+                    	 <td><input type="button"  value="导入文件" class="bluebt" onclick="submitFrom()">
+                          </td>
+                    </tr>
+                    <tr>
+                     <td colspan="3" align="center"><span style="color:black">文件命名格式：如PWTX_20150101_0000，后四位数字为当日上传文件序号，不可重复</span></td>
+                     </tr><!-- modify by huwei -->
+                    <tr id="resultTr" style="display: none;">
+                    	<td style="color: red;" class="texalirig pad2" valign="top"><b>错误信息：</b></td>
+                    	<td colspan="2" id="resultTd"> </td>
+                    </tr>
+                     <tr id="downLoadTr" style="display: none;">
+                    	<td style="color: red;" class="texalirig pad2" valign="top">&nbsp;</td>
+                    	<td colspan="2">
+                    		<input type="button" value="下载回盘 " class="queding" >
+                    	</td>
+                    </tr>
+                </tbody></table>
+                </form>
+            </div>
+            </div>
+    </div>
+
+    <!-- right Content end -->
+</div>
+<script>
+  // 文件下载 
+function downloadFile(fileName, content){
+    var aLink = document.createElement('a');
+    var blob = new Blob([content]);
+    var evt = document.createEvent("HTMLEvents");
+    evt.initEvent("click", false, false);//initEvent 不加后两个参数在FF下会报错, 感谢 Barret Lee 的反馈
+    aLink.download = fileName;
+    aLink.href = URL.createObjectURL(blob);
+    aLink.dispatchEvent(evt);
+}
+// http://www.jb51.net/article/47723.htm
+</script>
+
+<script language="javascript">
+function submitFrom(){
+    if($("#fileId").val()==""){
+        alert("请选择要批量提现的文件!");
+        $("#fileId").focus();
+        return;
+    }
+    showWait();
+    $("#resultTr").hide();
+    $("#resultTd").html("");
+    $("#downLoadTr").hide();
+    $("#batchFrom").submit();
+}
+
+function callback(flag,result,errorNo,successNo,downFilename,flowFlag){
+    hideWait();
+    if(flag=="0"){
+//      alert("导入失败,"+result);
+        $("#resultTr").show();
+        $("#resultTd").html(result);
+    }else{
+        if(flowFlag=="1"){
+            alert("提现成功["+successNo+"]条,失败["+errorNo+"]条");
+            $("#downFilename").val(downFilename);
+            $("#downLoadTr").show();
+            if(errorNo!=0){
+                $("#resultTr").show();
+                $("#resultTd").html(result);
+            }
+        }else{
+            alert("导入文件成功");
+        }
+    }
+}
+
+function downLoad(){
+    $("#downLoadFrom").submit();
+}
+</script>
+</body>
+</html>

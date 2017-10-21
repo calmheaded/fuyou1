@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>转账交易管理/单笔转账</title>
+	<link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+<div class="content transferOne">
+	<div class="transferSingle">
+		<div class="tableOne">
+			<table id="tableOne">
+				<tbody>
+					<tr>
+						<td>用户名：</td>
+						<td>jzcf001</td>
+					</tr>
+					<tr>
+						<td>转账类型：</td>
+						<td>
+							<select id="selectOne">
+								<option value="">付款</option>
+								<option value="">收款</option>
+							</select>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="tableTab">
+			<div class="one">
+				<table id="tableTwo">
+					<tbody>
+						<tr>
+							<td></td>
+							<td>转账付款复核完成后，实时到账可用</td>
+						</tr>
+						<tr>
+							<td>收款用户名：</td>
+							<td><input type="text"><span class="spanOne"> * </span><span class="spanTwo"> <input type="checkbox"> 收款后立即冻结</span></td>
+						</tr>
+						<tr>
+							<td>交易金额：</td>
+							<td><input type="text"> 元 <span class="spanThree">*</span></td>
+						</tr>
+						<tr>
+							<td>转账用途：</td>
+							<td>
+								<select id="">
+									<option value="">其他</option>
+									<option value="">手续费</option>
+									<option value="">投资</option>
+									<option value="">还款</option>
+									<option value="">滞纳金</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>备注：</td>
+							<td>
+								<textarea id="textarea"></textarea><br>
+								<span>剩余字数：60</span>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><input type="button" value="确认" id="btn" class="select"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="two">
+				<p>转账收款复核完成后，资金到未转结余额里，T+1工作日转结可用</p>
+				<table id="tableThree">
+					<tbody>
+						<tr>
+							<td>付款用户名：</td>
+							<td><input type="text"><span> *</span></td>
+						</tr>
+						<tr>
+							<td>交易金额：</td>
+							<td><input type="text"> 元 <span>*</span></td>
+						</tr>
+						<tr>
+							<td>预授权合同号：</td>
+							<td><input type="text"></td>
+						</tr>
+						<tr>
+							<td>转账用途：</td>
+							<td>
+								<select id="">
+									<option value="">其他</option>
+									<option value="">手续费</option>
+									<option value="">投资</option>
+									<option value="">还款</option>
+									<option value="">滞纳金</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>备注：</td>
+							<td>
+								<textarea id="textarea"></textarea><br>
+								<span>剩余字数：60</span>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><input type="button" value="确认" id="btn" class="select"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="../script/jquery.min.js"></script>
+<script>
+	$(function(){
+		$("#selectOne").change(function(){
+			var index=$("#selectOne option:checked").index();
+			$(".tableTab > div").eq(index).show().siblings().hide();
+		});
+	});
+</script>
+</body>
+</html>

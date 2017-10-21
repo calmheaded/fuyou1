@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>系统管理/法人用户列表</title>
+	<link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+	<div class="content spacing bgcolor">
+		<p><label class="label" >用户名：</label><input type="text"><label class="label">姓名：</label><input type="text" id="usr"><label class="label">身份证：</label><input type="text"></p>
+		<p><label class="label">用户状态：</label><select id=""><option value="">请选择</option></select><label class="label">起始日期：</label><input type="date"><label class="label">终止日期：</label><input type="date"><input id="searchbtn" type="button" value="查询" class="bluebt"></p>
+	</div>
+	<div class="containTable">
+		<table id="table" cellpadding="0" cellspacing="0">
+			<tbody id="tbList">
+				<tr class="tablebtbg">
+					<th style="border-left:none;white-space: nowrap;"><span class="tablebtlef">用户名</span></th>
+					<th>企业名称</th>
+					<th>法人姓名</th>
+					<th>法人手机号码</th>
+					<th>法人邮箱</th>
+					<th>注册时间</th>
+					<th>用户状态</th>
+					<th style="border-right:none;white-space: nowrap;"><span class="tablebtrig">操作</span></th>
+				</tr>
+				<tr>
+					<th>zhangsan</th>
+					<th>2</th>
+					<th>3</th>
+					<th>4</th>
+					<th>5</th>
+					<th>6</th>
+					<th>7</th>
+					<th>8</th>
+				</tr>
+				<tr>
+					<th>lisi</th>
+					<th>2</th>
+					<th>3</th>
+					<th>4</th>
+					<th>5</th>
+					<th>6</th>
+					<th>7</th>
+					<th>8</th>
+				</tr>
+				<tr>
+					<th>wang</th>
+					<th>2</th>
+					<th>3</th>
+					<th>4</th>
+					<th>5</th>
+					<th>6</th>
+					<th>7</th>
+					<th>8</th>
+				</tr>
+			</tbody>
+		</table>
+		<script>
+			// 表格搜索
+			window.onload = function(){
+				var searchBtn = document.getElementById('searchbtn');
+				var userInput = document.getElementById('usr');
+				var oTab = document.getElementById('table');
+				var len = oTab.tBodies[0].rows.length;
+				 var usertext =userInput.value;
+				 searchBtn.onclick = function(){
+				   for(var i =0;i<len;i++){
+				   	var allcells = oTab.tBodies[0].rows[i].cells[0].innerHTML;
+				  	var arr = usertext.split('');
+
+				  	var bFound=false;
+				  		for(var j =0;j<arr.lenth;j++){
+				  				if(allcells.search(arr[j])!=-1){
+				   			bFound=true;
+
+							break;
+
+				  		}
+
+				  		}
+
+				  		if(bFound)
+							{
+								oTab.tBodies[0].rows[i].style.background='yellow';
+							}
+							else
+							{
+								oTab.tBodies[0].rows[i].style.background='';
+							}
+								   
+				   }
+
+				 	
+				 }
+			}
+			
+		</script>
+		<div class="page">
+			<a href="#" style="background:#fcf1e3;border:1px solid #e58f19;color:#e58f19;font-weight:bold;">1</a><span class="marlefrig5">共0页</span><span class="marlef10">跳转到<input type="text" size="4" value="1" id="tzym" class="pad2"><input type="button" onclick="goToPage()" value=" " class="gobg"></span>
+		</div>
+	</div>
+	<script>
+$(function(){
+// 	autoCompleteName("fast_search");
+});
+function fastSearch(){
+	document.getElementById("searchForm").submit();
+}
+function resetSearch(){
+	document.getElementById("fast_search").value="";
+	document.getElementById("word").value="";
+	document.getElementById("isBusic").value="";
+	document.getElementById("userSt").value="";
+// 	document.getElementById("searchForm").submit();
+}
+	</script>
+	<script>
+		// 页码
+		$(function(){
+			initTable();
+			//初始化分页
+
+		});	
+		function initTable(queryDate){
+			$.getJSON(url,{},function(data){
+				var tb =$(#'tbList');
+				for(var i=0;i<data.length;i++){
+					var strTr = '<tr>';
+					strTr+='<td>'+ +'<td>';
+					strTr+='<td>'+ +'<td>';
+					strTr+='<td>'+ +'<td>';
+					strTr+='<td>'+ +'<td>';
+					strTr+='<td>操作</td>';
+					strTr+='</tr>';
+					tb.append(strTr);
+				}
+				//处理分页标签
+
+
+				//绑定分页单机事件
+
+			});
+		}
+	</script>
+	
+</body>
+</html>

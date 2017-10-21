@@ -1,0 +1,918 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>个人用户列表</title>
+<link rel="shortcut icon"  href="images/bankLogos/title_icon/0805_title_icon.png" />
+<link rel="Bookmark"  href="images/bankLogos/title_icon/0805_title_icon.png" />
+<link href="css/fuiou.css" rel="stylesheet" type="text/css" /> 
+<script type="text/javascript" src="scripts/public.js" language="javascript"></script>
+<script type="text/javascript" src="scripts/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="scripts/loading.js" language="javascript"></script>
+<!--日历控件--> 
+<script type="text/javascript"  src="scripts/My97DatePicker/WdatePicker.js"></script>
+<link href="styles/calendar.css" rel="stylesheet" type="text/css" />
+<!--日历控件结束--> 
+<script language="javascript">
+$(function(){
+// 	autoCompleteName("fast_search");
+});
+function fastSearch(){
+	document.getElementById("searchForm").submit();
+}
+function resetSearch(){
+	document.getElementById("fast_search").value="";
+	document.getElementById("word").value="";
+	document.getElementById("isBusic").value="";
+	document.getElementById("userSt").value="";
+// 	document.getElementById("searchForm").submit();
+}
+</script>
+</head>
+<body >
+
+<script language="javascript">
+	function userDetail(login_id){
+		 showWait();
+		window.location.href= "userAction_modifyDetail.action?loginId="+login_id;
+	}
+</script>
+
+
+<script language="javascript">
+function doNext(loginId,flag){
+	if(flag==2){
+		if(!confirm("确认【批准】此用户注销请求?")){
+			return;
+		}
+	}
+	if(flag==3){
+		if(!confirm("确认【驳回】此用户注销请求?")){
+			return;
+		}
+	}
+	$.ajax({
+        type: "POST",
+        dataType:"text",
+        beforeSend:function(XHR){showWait();},
+        url: "/jzh/userAction_updateUserSt.action",
+        data: "flag="+flag+"&loginId="+loginId,
+        success: function(msg){
+	       	 if(msg=='timeout'){
+	       		 window.location.reload(true);
+	       		 return;
+	       	 }
+	       	 hideWait();
+	         if(msg=='success'){
+	         	 alert("操作成功!");
+	         	document.getElementById("start").value=0;
+	         	document.getElementById("pageForm").submit();
+	         }else{
+	         	 alert(msg+"请稍后重试！");
+	         }
+       }
+   });
+}
+</script>
+
+
+<div class="html">
+<div class="outdiv">
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script language="javascript">
+$(function(){
+	$("#menuDiv").wrap('<div class="leftdiv left" style="border:none;">');
+	var headShow="";
+	if('2'=='2'&&''!=''){
+		headShow='<img src="images/tel_img.gif" style="float: left;"/><span style="float: inherit;">富友服务热线：</span><br/><b>&nbsp;&nbsp;&nbsp;95138</b></p><br/>';
+	}
+	
+	
+	$("#menuDiv").after('<div class="leftweix">'+''+'<p></p><p><img class="weiximg"></p></div>');
+	
+
+	$("#menuDiv a").click(function(){
+		showWait();
+	});
+	$(".page a").click(function(){
+		if($(this).text() !='1'&&$(this).text() !=''){
+			showWait();
+		}
+	});
+	$(".page input[type='button']").click(function(){
+		showWait();
+	});
+	if('0'=='1'){
+		alert('');
+		
+	}
+});
+</script>
+</head>
+<body>
+
+<script type="text/javascript">
+Refulsh();
+function Refulsh(){
+	$.ajax({
+        type: "POST",
+        dataType:"text",
+        beforeSend:function(XHR){showWait();},
+        url: "/jzh/balanceSearchAction_refreshBalance.action",
+        success: function(msg){
+       	 if(msg=='timeout'){
+       		 window.location.reload(true);
+       		 return;
+       	 }
+       	 hideWait();
+             if(msg==''){
+             	 alert("刷新失败,请稍后重试!");
+             }else{
+            	 var result=eval('('+msg+')');
+            	 document.getElementById("acnt_balance").innerHTML=result.acnt_balance;
+            	 document.getElementById("acnt_ky").innerHTML=result.acnt_ky;
+            	 document.getElementById("acnt_wj").innerHTML=result.acnt_wj;
+            	 document.getElementById("acnt_freeze_balance").innerHTML=result.acnt_freeze_balance;
+            	 document.getElementById("acnt_sxf").innerHTML=result.acnt_sxf;
+             }
+        }
+   });
+}
+
+function checkLogoHas(){
+	    var ImgObj = new Image(); //判断图片是否存在  
+	    ImgObj.src = imgurl;  
+	    //没有图片，则返回-1  
+	    if (ImgObj.fileSize > 0 || (ImgObj.width > 0 && ImgObj.height > 0)) {  
+	        alert(imgurl + '存在');  
+	    } else {  
+	        alert(imgurl + '不存在');  
+	    }  
+}
+</script>
+
+ <div class="logoutdiv">
+	 
+	 
+		 <div class="logo2 left" style="background:none;display:table;vertical-align:middle;text-align:center;">
+		 <span style="display:table-cell;vertical-align:middle;align-top:5px;">
+		 	<img src="images/bankLogos/0805_pc_logo.png" onerror="javascript:this.src='images/logo2_bg.gif'">&nbsp;
+		 </span>
+		 </div>
+		 <div class="width355 right action" style="margin: 0px;">
+			 <p class="right">
+				 <a href="javascript:window.location.href='loginOut.action'" style="font-weight: bold;">安全退出</a>
+			 </p>
+		 </div>
+	 
+    </div>
+    
+    <div class="welcome">
+    	<span class="wellef"></span>   	
+        <span class="welmid">
+        <div>
+			
+        	<div class="left">
+				用户名称 ：<span class="colf01313">
+					
+						金砖财富
+					
+					
+	        	</span>
+	        	平台名称：
+	        	<span class="colf01312">
+					
+		      	  	金砖财富
+	        	</span>
+	        </div>
+        </div>
+
+  
+           
+      
+        
+            <div class="left"><span>账面余额:<span id="acnt_balance">58720180.75</span>
+                                               可用余额:<span id="acnt_ky">49300028.86</span>
+                                               冻结余额:<span id="acnt_freeze_balance">0.00</span>
+                                               未转结余额:<span id="acnt_wj">9420151.89</span>
+                  
+                    &nbsp;<a href="#"  onclick="Refulsh();" style="border: 1px solid gray; padding: 2px;color: black;text-transform:none;text-decoration:none;" title="刷新余额">刷新</a>
+                   </span>
+                </div>
+          
+         
+      </span>
+        <span class="welrig"></span>
+    </div>
+    <!-- Headed end -->
+    </body>
+    </html>
+ 
+
+	<div class="menulefbg"></div>
+    	<!-- 生成模块 开始 -->
+		
+		<div class="leftdiv left" id="menuDiv"><div class="lefmenubt"><p class="">账户管理</p></div><ul><li class="bordasbomccc"><a href="balanceSearchAction_oneDetail.action">余额查询</a></li><li class="bordasbomccc"><a href="balanceSearchAction_batchDetail.action">余额批量查询</a></li><li class="bordasbomccc"><a href="regBatchdetail.action">批量开户</a></li><li class="bordasbomccc"><a href="regAction_oneDetail.action">单笔开户</a></li><li class="bordasbomccc"><a href="webLogAction_getCzListForPage.action">充值/提现查询</a></li><li class="bordasbomccc"><a href="cashWithdrawals_detail.action">账号提现</a></li><li class="bordasbomccc"><a href="txnLogAction_reCheckListForPage.action?busiCd=PWTX&src_tp=2&txn_tp=MCHNT">商户提现复核</a></li></ul><div class="lefmenubt bortopacd0e8"><p class="">转账交易管理</p></div><ul><li class="bordasbomccc"><a href="newTransFer_oneDetail.action">单笔转账</a></li><li class="bordasbomccc"><a href="newTransFer_batchDetail.action">批量转账</a></li><li class="bordasbomccc"><a href="fasFileLogAction_getListForPage.action?busiCd=PWPCV&src_tp=3">转账复核</a></li><li class="bordasbomccc"><a href="fasFileLogAction_getListForPage.action?busiCd=PWPCV">上传文件查询</a></li><li class="bordasbomccc"><a href="txnLogAction_getTransferListForPage.action?busiCd=PWPCV">转账交易查询</a></li><li class="bordasbomccc"><a href="transDetailtodetail.action">个人交易明细</a></li><li class="bordasbomccc"><a href="transDetailtoMchntDetail.action">商户交易明细</a></li></ul><div class="lefmenubt bortopacd0e8"><p class="">预授权综合管理</p></div><ul><li class="bordasbomccc"><a href="freezeLogAction_getListForPage.action">预授权管理</a></li><li class="bordasbomccc"><a href="freezeLogAction_batchDetail.action">批量预授权</a></li><li class="bordasbomccc"><a href="fasFileLogAction_getListForPage.action?busiCd=PW13">上传文件查询</a></li></ul><div class="lefmenubt bortopacd0e8"><p class="">划拨交易管理</p></div><ul><li class="bordasbomccc"><a href="transFerBetweenUser_oneDetail.action">单笔划拨</a></li><li class="bordasbomccc"><a href="transFerBetweenUser_batchDetail.action">批量划拨</a></li><li class="bordasbomccc"><a href="fasFileLogAction_getListForPage.action?busiCd=PW03&src_tp=3">划拨复核</a></li><li class="bordasbomccc"><a href="fasFileLogAction_getListForPage.action?busiCd=PW03">上传文件查询</a></li><li class="bordasbomccc"><a href="txnLogAction_getTransferListForPage.action?busiCd=PW03">划拨交易查询</a></li></ul><div class="lefmenubt bortopacd0e8"><p class="">冻结管理</p></div><ul><li class="bordasbomccc"><a href="freezeAction_getUserFreezeListForPage.action">冻结管理</a></li><li class="bordasbomccc"><a href="freezeAction_batchFreezeDetail.action">批量冻结</a></li><li class="bordasbomccc"><a href="freezeAction_batchUnFreezeDetail.action">批量解冻</a></li><li class="bordasbomccc"><a href="fasFileLogAction_getListForPage.action?busiCd=PWDJ">冻结文件查询</a></li><li class="bordasbomccc"><a href="fasFileLogAction_getListForPage.action?busiCd=PWJD">解冻文件查询</a></li></ul><div class="lefmenubt bortopacd0e8" style="background: url(images/lefmenubtdown_bg.gif) repeat-x 0 0"><p class="">系统管理</p></div><ul style="display:block"><li class="bordasbomccc"><a href="passwdModify.action">登录密码修改</a></li><li class="bordasbomccc daohang"><a href="userAction_userList.action?mobile_code=1">个人用户列表</a></li><li class="bordasbomccc"><a href="userAction_userList.action?mobile_code=2">法人用户列表</a></li><li class="bordasbomccc"><a href="addressList_addressList.action">通讯录信息维护</a></li><li class="bordasbomccc"><a href="sysNotice_sysNotice.action">系统公告</a></li><li class="bordasbomccc"><a href="cashWithSet_list.action">用户提现配置</a></li></ul><div class="lefmenubt bortopacd0e8"><p class="">委托充值</p></div><ul><li class="bordasbomccc"><a href="batchRechargewtRechargeDatail.action">单笔充值</a></li><li class="bordasbomccc"><a href="batchRechargebatchRechargeDetail.action">批量充值</a></li><li class="bordasbomccc"><a href="fasFileLogAction_getListForPage.action?busiCd=PW11&src_tp=3">充值复核</a></li><li class="bordasbomccc"><a href="fasFileLogAction_getListForPage.action?busiCd=PW11">上传文件查询</a></li><li class="bordasbomccc"><a href="webLogAction_getWtCzListForPage.action">委托充值查询</a></li></ul><div class="lefmenubt bortopacd0e8"><p class="">委托提现</p></div><ul><li class="bordasbomccc"><a href="cashWithdrawals_wtWithdrawDetail.action">单笔提现</a></li><li class="bordasbomccc"><a href="cashWithdrawals_batch.action">批量提现</a></li><li class="bordasbomccc"><a href="fasFileLogAction_getListForPage.action?busiCd=PWTX&src_tp=3">提现复核</a></li><li class="bordasbomccc"><a href="fasFileLogAction_getListForPage.action?busiCd=PWTX">上传文件查询</a></li><li class="bordasbomccc"><a href="webLogAction_getWtTxListForPage.action">委托提现查询</a></li></ul></div>         
+		<!-- 左边模块 结束 --> 
+    
+    <!-- right Content start -->
+    
+    <div class="rightdiv left">
+        <div class="prompt">
+        	<strong class="tex14">系统管理>></strong>
+        	<span>
+        	个人用户列表
+        	</span>
+        </div>
+    
+      <div class="content" >
+			<form  action="userAction_userList.action"  id="searchForm"   name="searchForm" method="post" >
+			<input type="hidden" name="mobile_code" value="1"/>
+				<div class="left pad10 sousuodiv">
+					<table>
+						<tr style="height: 35px;">
+							<td width="100%">
+		    					用户名
+								
+	  					    		<input type="text"  id="fast_search"  name="loginId"  value=""  class="sinputtex pad2 " />&nbsp;
+	  					    	
+			        	 		
+			        	 		姓名
+			        	 		<input type="text" id="artifNm" name="artifNm" value="" class="sinputtex pad2" style="width:80px;"/>&nbsp;
+			        	 		身份证
+			        	 		<input type="text" id="idNo" name="idNo"  value="" class="sinputtex pad2" />&nbsp;
+			        	 		
+  					    	</td>
+  					    </tr>
+  					    <tr>
+				        	 <td>
+			        	 		用户状态
+				    			<select id="userSt" name="userSt" style="width:80px;">
+				    				<option value="">请选择</option>
+				    				<option value="1"  >正常</option>
+				    				<option value="2" >已注销</option>
+				    				<option value="3" >申请注销</option>
+				    			</select>&nbsp;&nbsp;
+				    			起始日期： <input readonly="readonly" style="width: 87px" class="Wdate" name="startTime" value=""  id="startTime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});" />
+	        	 				终止日期： <input readonly="readonly" class="Wdate" style="width: 87px" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});" name="endTime" value="" id="endTime" />
+								<input type="button"  class="bluebt"   value="查询"  onclick="fastSearch()"/>
+				    			
+			    			</td>
+			    		</tr>
+			    	</table>
+		    	</div>
+ 			</form>
+          <div class="left pad10 width815" >
+            <div class="borbom88bbda width815"  style="overflow-x: auto;">
+            <table width="100%" cellpadding="0" cellspacing="0" class="center table" style="table-layout: auto;">
+              <tr class="tablebtbg">
+               			<th style="border-left:none;white-space: nowrap;"><span class="tablebtlef">	用户名</span></th>
+						<th style="white-space: nowrap;">客户姓名</th>
+						
+<!-- 						<th style="white-space: nowrap;">身份证号码               </th> -->
+						<th style="white-space: nowrap;">手机号码</th>
+						<th style="white-space: nowrap;">邮箱</th>
+						<th style="white-space: nowrap;">注册时间                 </th>
+						<!-- <th style="white-space: nowrap;">签约状态                  </th>
+						<th style="white-space: nowrap;">账户信息验证状态                  </th>
+						<th style="white-space: nowrap;">账户生效状态                  </th> -->
+						<th style="white-space: nowrap;">用户状态                  </th>
+						<th style="border-right:none;white-space: nowrap;"><span class="tablebtrig">操作</span></th>
+                </tr>
+                
+                  <tr  style="text-align: left;white-space: nowrap;"  class="bordasbomccc  bgcolfffce3" 
+                 
+                  onmouseout="showColor(this)" onmousemove="hideColor(this)" >
+                            <td class="bordasbomccc borlef88bbda">
+                            	
+									17210010024
+                            </td>
+                            
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	李丽
+                            </td>
+                             <td class="bordasbomccc" style="white-space: nowrap;">
+                               
+                               
+								   17210010024
+							   
+                           		
+                            </td>
+                             <td class="bordasbomccc" style="white-space: nowrap;">
+                           
+                             	
+                               -------
+                               
+                               
+                           	
+                            </td>
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	
+                            		2017-06-22 13:51:58
+                            	
+                            	
+                            </td>
+                            
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	正常
+                            	
+                            	
+                            </td>
+                            <td class="bordasbomccc borrig88bbda" style="white-space: nowrap;">
+
+
+<!-- 								-- -->
+
+                            	
+                            	
+                            		
+                           				<a href="#" onclick="userDetail('17210010024')">查看</a>
+									
+                            	
+                            	
+                           	
+                            </td>
+                        </tr>
+                     
+                  <tr  style="text-align: left;white-space: nowrap;"  class="bordasbomccc " 
+                 
+                  onmouseout="showColor(this)" onmousemove="hideColor(this)" >
+                            <td class="bordasbomccc borlef88bbda">
+                            	
+									17300340073
+                            </td>
+                            
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	爱心&middot;伍晓杰
+                            </td>
+                             <td class="bordasbomccc" style="white-space: nowrap;">
+                               
+                               
+								   17300340073
+							   
+                           		
+                            </td>
+                             <td class="bordasbomccc" style="white-space: nowrap;">
+                           
+                             	
+                               -------
+                               
+                               
+                           	
+                            </td>
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	
+                            		2017-06-22 13:50:34
+                            	
+                            	
+                            </td>
+                            
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	正常
+                            	
+                            	
+                            </td>
+                            <td class="bordasbomccc borrig88bbda" style="white-space: nowrap;">
+
+
+<!-- 								-- -->
+
+                            	
+                            	
+                            		
+                           				<a href="#" onclick="userDetail('17300340073')">查看</a>
+									
+                            	
+                            	
+                           	
+                            </td>
+                        </tr>
+                     
+                  <tr  style="text-align: left;white-space: nowrap;"  class="bordasbomccc  bgcolfffce3" 
+                 
+                  onmouseout="showColor(this)" onmousemove="hideColor(this)" >
+                            <td class="bordasbomccc borlef88bbda">
+                            	
+									15010919600
+                            </td>
+                            
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	实姓名
+                            </td>
+                             <td class="bordasbomccc" style="white-space: nowrap;">
+                               
+                               
+								   15010919600
+							   
+                           		
+                            </td>
+                             <td class="bordasbomccc" style="white-space: nowrap;">
+                           
+                             	
+                               -------
+                               
+                               
+                           	
+                            </td>
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	
+                            		2017-06-22 13:46:41
+                            	
+                            	
+                            </td>
+                            
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	正常
+                            	
+                            	
+                            </td>
+                            <td class="bordasbomccc borrig88bbda" style="white-space: nowrap;">
+
+
+<!-- 								-- -->
+
+                            	
+                            	
+                            		
+                           				<a href="#" onclick="userDetail('15010919600')">查看</a>
+									
+                            	
+                            	
+                           	
+                            </td>
+                        </tr>
+                     
+                  <tr  style="text-align: left;white-space: nowrap;"  class="bordasbomccc " 
+                 
+                  onmouseout="showColor(this)" onmousemove="hideColor(this)" >
+                            <td class="bordasbomccc borlef88bbda">
+                            	
+									17300340072
+                            </td>
+                            
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	上官&middot;匡书文
+                            </td>
+                             <td class="bordasbomccc" style="white-space: nowrap;">
+                               
+                               
+								   17300340072
+							   
+                           		
+                            </td>
+                             <td class="bordasbomccc" style="white-space: nowrap;">
+                           
+                             	
+                               -------
+                               
+                               
+                           	
+                            </td>
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	
+                            		2017-06-22 13:21:47
+                            	
+                            	
+                            </td>
+                            
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	正常
+                            	
+                            	
+                            </td>
+                            <td class="bordasbomccc borrig88bbda" style="white-space: nowrap;">
+
+
+<!-- 								-- -->
+
+                            	
+                            	
+                            		
+                           				<a href="#" onclick="userDetail('17300340072')">查看</a>
+									
+                            	
+                            	
+                           	
+                            </td>
+                        </tr>
+                     
+                  <tr  style="text-align: left;white-space: nowrap;"  class="bordasbomccc  bgcolfffce3" 
+                 
+                  onmouseout="showColor(this)" onmousemove="hideColor(this)" >
+                            <td class="bordasbomccc borlef88bbda">
+                            	
+									17300340071
+                            </td>
+                            
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	鲍欣然
+                            </td>
+                             <td class="bordasbomccc" style="white-space: nowrap;">
+                               
+                               
+								   17300340071
+							   
+                           		
+                            </td>
+                             <td class="bordasbomccc" style="white-space: nowrap;">
+                           
+                             	
+                               -------
+                               
+                               
+                           	
+                            </td>
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	
+                            		2017-06-22 13:18:28
+                            	
+                            	
+                            </td>
+                            
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	正常
+                            	
+                            	
+                            </td>
+                            <td class="bordasbomccc borrig88bbda" style="white-space: nowrap;">
+
+
+<!-- 								-- -->
+
+                            	
+                            	
+                            		
+                           				<a href="#" onclick="userDetail('17300340071')">查看</a>
+									
+                            	
+                            	
+                           	
+                            </td>
+                        </tr>
+                     
+                  <tr  style="text-align: left;white-space: nowrap;"  class="bordasbomccc " 
+                 
+                  onmouseout="showColor(this)" onmousemove="hideColor(this)" >
+                            <td class="bordasbomccc borlef88bbda">
+                            	
+									17300340070
+                            </td>
+                            
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	禹佳乐
+                            </td>
+                             <td class="bordasbomccc" style="white-space: nowrap;">
+                               
+                               
+								   17300340070
+							   
+                           		
+                            </td>
+                             <td class="bordasbomccc" style="white-space: nowrap;">
+                           
+                             	
+                               -------
+                               
+                               
+                           	
+                            </td>
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	
+                            		2017-06-22 10:18:41
+                            	
+                            	
+                            </td>
+                            
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	正常
+                            	
+                            	
+                            </td>
+                            <td class="bordasbomccc borrig88bbda" style="white-space: nowrap;">
+
+
+<!-- 								-- -->
+
+                            	
+                            	
+                            		
+                           				<a href="#" onclick="userDetail('17300340070')">查看</a>
+									
+                            	
+                            	
+                           	
+                            </td>
+                        </tr>
+                     
+                  <tr  style="text-align: left;white-space: nowrap;"  class="bordasbomccc  bgcolfffce3" 
+                 
+                  onmouseout="showColor(this)" onmousemove="hideColor(this)" >
+                            <td class="bordasbomccc borlef88bbda">
+                            	
+									17300340061
+                            </td>
+                            
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	柏新柔
+                            </td>
+                             <td class="bordasbomccc" style="white-space: nowrap;">
+                               
+                               
+								   17300340061
+							   
+                           		
+                            </td>
+                             <td class="bordasbomccc" style="white-space: nowrap;">
+                           
+                             	
+                               -------
+                               
+                               
+                           	
+                            </td>
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	
+                            		2017-06-21 17:15:14
+                            	
+                            	
+                            </td>
+                            
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	正常
+                            	
+                            	
+                            </td>
+                            <td class="bordasbomccc borrig88bbda" style="white-space: nowrap;">
+
+
+<!-- 								-- -->
+
+                            	
+                            	
+                            		
+                           				<a href="#" onclick="userDetail('17300340061')">查看</a>
+									
+                            	
+                            	
+                           	
+                            </td>
+                        </tr>
+                     
+                  <tr  style="text-align: left;white-space: nowrap;"  class="bordasbomccc " 
+                 
+                  onmouseout="showColor(this)" onmousemove="hideColor(this)" >
+                            <td class="bordasbomccc borlef88bbda">
+                            	
+									17300340060
+                            </td>
+                            
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	殷梓潼
+                            </td>
+                             <td class="bordasbomccc" style="white-space: nowrap;">
+                               
+                               
+								   17300340060
+							   
+                           		
+                            </td>
+                             <td class="bordasbomccc" style="white-space: nowrap;">
+                           
+                             	
+                               -------
+                               
+                               
+                           	
+                            </td>
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	
+                            		2017-06-21 16:40:42
+                            	
+                            	
+                            </td>
+                            
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	正常
+                            	
+                            	
+                            </td>
+                            <td class="bordasbomccc borrig88bbda" style="white-space: nowrap;">
+
+
+<!-- 								-- -->
+
+                            	
+                            	
+                            		
+                           				<a href="#" onclick="userDetail('17300340060')">查看</a>
+									
+                            	
+                            	
+                           	
+                            </td>
+                        </tr>
+                     
+                  <tr  style="text-align: left;white-space: nowrap;"  class="bordasbomccc  bgcolfffce3" 
+                 
+                  onmouseout="showColor(this)" onmousemove="hideColor(this)" >
+                            <td class="bordasbomccc borlef88bbda">
+                            	
+									15031068000
+                            </td>
+                            
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	合作商
+                            </td>
+                             <td class="bordasbomccc" style="white-space: nowrap;">
+                               
+                               
+								   15031068000
+							   
+                           		
+                            </td>
+                             <td class="bordasbomccc" style="white-space: nowrap;">
+                           
+                             	
+                               -------
+                               
+                               
+                           	
+                            </td>
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	
+                            		2017-06-21 16:13:14
+                            	
+                            	
+                            </td>
+                            
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	正常
+                            	
+                            	
+                            </td>
+                            <td class="bordasbomccc borrig88bbda" style="white-space: nowrap;">
+
+
+<!-- 								-- -->
+
+                            	
+                            	
+                            		
+                           				<a href="#" onclick="userDetail('15031068000')">查看</a>
+									
+                            	
+                            	
+                           	
+                            </td>
+                        </tr>
+                     
+                  <tr  style="text-align: left;white-space: nowrap;"  class="bordasbomccc " 
+                 
+                  onmouseout="showColor(this)" onmousemove="hideColor(this)" >
+                            <td class="bordasbomccc borlef88bbda">
+                            	
+									17300340059
+                            </td>
+                            
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	瞿新童
+                            </td>
+                             <td class="bordasbomccc" style="white-space: nowrap;">
+                               
+                               
+								   17300340059
+							   
+                           		
+                            </td>
+                             <td class="bordasbomccc" style="white-space: nowrap;">
+                           
+                             	
+                               -------
+                               
+                               
+                           	
+                            </td>
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	
+                            		2017-06-21 16:10:12
+                            	
+                            	
+                            </td>
+                            
+                            <td class="bordasbomccc" style="white-space: nowrap;">
+                            	正常
+                            	
+                            	
+                            </td>
+                            <td class="bordasbomccc borrig88bbda" style="white-space: nowrap;">
+
+
+<!-- 								-- -->
+
+                            	
+                            	
+                            		
+                           				<a href="#" onclick="userDetail('17300340059')">查看</a>
+									
+                            	
+                            	
+                           	
+                            </td>
+                        </tr>
+                     
+                </table>
+            </div>
+            <div class='page'><SCRIPT LANGUAGE="JavaScript">																					
+function submitFormPage(start){																									
+document.getElementById('start').value=start;																				
+document.getElementById('pageForm').submit();																		
+ } 
+function goToPage(){																				    					            
+		var pageVal=document.getElementById('tzym');														            
+		var countPageNo=561;																		 
+		var txt=/^\d*$/;																													
+		if(!txt.test(pageVal.value)){																										
+			alert('页数应为正整数!');																										
+			pageVal.focus();																												
+			return ;																																
+		}																																			
+		if(pageVal.value<2){																												
+			submitFormPage(0);																											
+		}																																			
+		if(pageVal.value>=countPageNo){																						
+			submitFormPage(5600);									
+		}else{																																		
+			submitFormPage((pageVal.value-1)*10);												
+		}																																			
+ } 
+</SCRIPT>
+<a href='#' style='background:#fcf1e3;border:1px solid #e58f19;color:#e58f19;font-weight:bold;'>1</a><a href='#' onclick='submitFormPage(10)'>2</a><a href='#' onclick='submitFormPage(20)'>3</a><a href='#' onclick='submitFormPage(30)'>4</a><a href='#' onclick='submitFormPage(40)'>5</a><span> … </span><span><a href='#' onclick='submitFormPage(10)' >下一页</a></span><span><a href='#' onclick='submitFormPage(5600)' >末页</a></span><span class='marlefrig5'>共561页</span><span class='marlef10'>跳转到<input type='text' size='4' value='1' id='tzym' class='pad2' /><input type='button'  onclick='goToPage()'  value=' ' class='gobg' /></span></div>
+          </div>
+        </div>
+        <div class="explain left">
+      </div>
+    </div>
+    <!-- right Content end -->
+</div>
+    
+
+ <!-- footer start -->
+<script type="text/javascript">
+    removeRightTel();
+    function removeRightTel(){
+        if('1'=='1'){
+            $(".right.tel").remove();
+        }
+    }
+</script>
+    <div class="footer">
+    <div class="footercon" style="color:o black;">
+    
+    </div>
+    <div class="footercon center" style="color:o black;">
+        
+    </div>
+    </div>
+    <!-- footer end -->
+    <script type="text/javascript">
+// 		var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+// 		document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F19ff713fa0f6aa05764a6c9d0c889c46' type='text/javascript'%3E%3C/script%3E")); 
+	 </script>
+
+
+
+
+
+</div>
+<!-- 翻页用到 -->
+<form id="pageForm" action="userAction_userList.action"  method="post" >
+	<input type="hidden"  name="start" id="start"></input>
+	<input type="hidden"  name="loginId"  value=""></input>
+	<input type="hidden"  name="artifNm"  value=""></input>
+	<input type="hidden"  name="idNo"  value=""></input>
+	<input type="hidden"  name="cardNo"  value=""></input>
+	<input type="hidden"  name="userSt"  value=""></input>
+	<input type="hidden"  name="contract_st"  value=""></input>
+	<input type="hidden"  name="isKaMi"  value=""></input>
+	<input type="hidden"  name="isKaNm"  value=""></input>
+	<input type="hidden"  name="word"  value=""></input>
+	<input type="hidden"  name="mobile_code"  value="1"></input>
+	<input type="hidden"  name="startTime"  value=""></input>
+	<input type="hidden"  name="endTime"  value=""></input>
+</form>
+<input type="hidden"  id="closeTp"/>
+</body>
+</html>

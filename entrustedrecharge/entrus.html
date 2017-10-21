@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>委托充值查询</title>
+</head>
+<link rel="stylesheet" href="../css/menudetail.css">
+    <script src="../script/jquery.min.js"></script>
+
+<body>
+	<div class="rightdiv left">
+        <div class="prompt">
+        	<strong class="tex14">
+        		委托充值管理
+        	&gt;&gt;</strong>
+        	<span>
+        		委托充值查询
+        	</span>
+        </div>
+    
+      <div class="content">
+			<form action="" id="" name="" method="post">
+		          	<div class=" pad10 sousuodiv">
+						<table width="100%">
+							<tbody><tr style="height: 35px;">
+							<td colspan="2">
+								查询范围:
+								<select id="" name="" >
+				    				<option value="1">三十一天内</option>
+				    				<option value="2">三十一天前</option>
+				    			</select>
+	        	 				起始日期： <span id="start_span"><input id="startTime" name="txnLog.startTime" class="" style="width: 80px" value="20170619" type="date"></span>
+	        	 				终止日期： <span id="end_span"><input id="endTime" name="txnLog.endTime" class="" style="width: 80px" value="20170619"  type="date"></span>
+								
+		    						&nbsp;用户名：
+  					    			<input id="fast_search" name="txnLog.IN_CUST_NO" value="" class="sinputtex pad2 ">
+ 					    			
+ 					    			
+							</td>
+							</tr>
+							<tr style="height: 35px;">
+							<td>
+  					    			交易状态：
+  					    			<select id="src_rsp_cd" name="txnLog.TXN_RSP_CD">
+  					    				<option value="">请选择</option>
+  					    				<option value="st1">已提交，待复核</option>
+  					    				<option value="st2">已复核，待处理</option>
+  					    				<option value="st3">正在处理</option>
+  					    				<option value="st5">复核不通过</option>
+  					    				<option value="0000">交易成功</option>
+  					    				<option value="QT">交易失败</option>
+  					    			</select>
+  					    			&nbsp;备注：
+	  					    		<input name="" value="" class="sinputtex pad2 ">
+			    			</td>
+			    			<td align="right">
+  					    			<input type="button" class="bluebt" value="查询" >
+  					    			<input type="button" class="bluebt" value="导出" >
+			    			</td>
+			    			</tr>
+			    		</tbody></table>
+		          	</div>
+ 			</form>
+          <div class=" pad10 width815">
+            <div  style="overflow-x: auto;">
+            <table width="100%" cellpadding="0" cellspacing="0"  style="table-layout: auto;">
+              <tbody><tr class="tablebtbg">
+               			<th style="border-left:none;white-space: nowrap;"><span class="tablebtlef">	充值流水号  </span></th>
+						<th style="white-space: nowrap;">&nbsp;记账流水&nbsp;                  </th>
+						<th style="white-space: nowrap;">&nbsp;充值时间&nbsp;                  </th>
+						<th style="white-space: nowrap;">&nbsp;充值金额(元)&nbsp;                  </th>
+						<th style="white-space: nowrap;">&nbsp;账户&nbsp;                  </th>
+						<th style="white-space: nowrap;">&nbsp;用户名    &nbsp;           </th>
+						<th style="white-space: nowrap;">&nbsp;用户名称 &nbsp;            </th>
+						<th style="white-space: nowrap;">&nbsp;备注&nbsp;</th>
+						<th style="border-right:none;white-space: nowrap;"><span class="tablebtrig">&nbsp;状态&nbsp;</span></th>
+                </tr>
+                
+                </tbody></table>
+            </div>
+            <div class="page">
+<a href="#" style="background:#fcf1e3;border:1px solid #e58f19;color:#e58f19;font-weight:bold;">1</a><span class="marlefrig5">共0页</span><span class="marlef10">跳转到<input type="text" size="4" value="1" id="tzym" class="pad2"><input type="button"  value=" " class="gobg"></span></div>
+          </div>
+        </div>
+        <div class="explain left">
+      </div>
+    </div>
+   <script>
+        // 判断用户名
+              var userInput = document.getElementById('fast_search');
+              var patrn=/^[A-Za-z0-9_]/;
+                userInput.onblur = function (){                 
+                  var userStr =userInput.value;
+                  if(!userStr){
+                    alert('用户名不能为空');
+                  }else if(!patrn.test(userStr)){
+                    alert('用户名必须是字母数字');
+                }
+            } 
+
+        function today(){
+            var d = new Date();
+            var str = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
+            return str
+          }
+        //当前时间
+
+
+        $(function(){
+        //  autoCompleteName("fast_search");
+        });
+        function fastSearch(){
+          /* if(!checkThreeMonthAcross()){//查询三个月内
+            return;
+          } */
+          var checkDate = false;
+          if($("#dateScope").val()=='1') {
+            checkDate = checkLtOrEq31Across();
+          } else {
+            checkDate = checkGt31Across();
+          }
+          if(!checkDate) {
+            return;
+          }
+          document.getElementById("searchForm").submit();
+        }
+        function resetSearch(){
+          document.getElementById("fast_search").value="";
+          document.getElementById("word").value="";
+          document.getElementById("startTime").value="";
+          document.getElementById("endTime").value="";
+          document.getElementById("src_rsp_cd").value="";
+        //  document.getElementById("searchForm").submit();
+        }
+      //文件查询
+
+       function exportExcel(){
+        var url = "url:excelVersion.jsp";
+        $.dialog({content:url ,
+                  title:'选择导出excel版本',
+                  lock: true,
+              background: '#FFF', /* 背景色 默认的遮罩背景色为:#DCE2F1浅蓝护眼色 */
+              max: false,
+              height:100,
+              min: false,
+              opacity: 0.5, /* 透明度 */
+              close: function(){
+                exportExcelClose();
+              }
+        });
+      }
+
+    function exportExcelClose(){
+        if(document.getElementById("closeTp").value=="1"){
+          document.getElementById("doForm").submit();
+        }
+      }
+      // 导出表格
+
+
+  //判断页码是否合法
+    function goToPage(){                                                                  
+        var pageVal=document.getElementById('tzym');                                        
+        var countPageNo=0;                                     
+        var txt=/^\d*$/;                                                          
+        if(!txt.test(pageVal.value)){                                                   
+          alert('页数应为正整数!');                                                    
+          pageVal.focus();                                                        
+          return ;                                                                
+        } 
+
+  // 跳转到某一页
+  // function submitFormPage(start){                                                  
+    // document.getElementById('start').value=start;                                        
+    // document.getElementById('pageForm').submit();                                    
+    //  }   
+
+    // if(pageVal.value<2){                                                       
+    //  submitFormPage(0);                                                      
+    // }                                                                      
+    // if(pageVal.value>=countPageNo){                                            
+    //  submitFormPage(0);                  
+    // }else{                                                                   
+    //  submitFormPage((pageVal.value-1)*10);                       
+    // }                                                                      
+ } 
+
+
+    //按页码跳转 第二种方法
+
+     // function jump(pageCount){
+     // var pageNow=document.getElementById("pageNow").value;
+     // if(pageNow==0){
+     //   alert("页数不能是0");
+     //    return;
+     //   }
+     // var param="0123456789";
+     // for(var i=0;i<pageNow.length;i++)
+     //  {
+     //   if(param.indexOf(pageNow.charAt(i))==-1)
+     //   {
+     //    alert("必须输入正整数");
+     //    return;
+     //   }
+     //   }
+     //   var pageNowInt = new Number(pageNow);
+     //   if(pageNowInt>parseInt(pageCount)) {
+     //   alert("输入页码超出范围!");
+     //   return;
+     //   }
+
+ </script>
+</body>
+</html>
